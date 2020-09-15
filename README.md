@@ -14,17 +14,15 @@ It works by first detecting the hand landmarks by Mediapipe in Android, and then
 * Unity with Android Build Support and Android SDK & NDK Tools (recommended with version 2019.4.6f1 or 2019.4.x)
 
 ## Installation
-1. Ensure adb (Android Debug Bridge) is available in command. In environment variables 'PATH', add path of android sdk platform-tools. The path should have either of below patterns:
-C:\Unity\2019.4.6f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools
-C:\Users\user\AppData\Local\Android\Sdk\platform-tools
+1. Enable Android Developer Mode and USB debugging in the mobile device. Connect the device with PC and allow permissions.
 
-2. Enable Android Developer Mode and USB debugging in the mobile device. Connect the device with PC and allow permissions.
-
-3. Install the "UnityHandTracking.apk" to the device: 
+2. Install the "UnityHandTracking.apk" to the device: 
 `adb install UnityHandTracking.apk`
 The .apk is included in release. The source code of the apk is available in [mediapipe_multi_hands_tracking_aar_unity](https://github.com/TesseraktZero/mediapipe_multi_hands_tracking_aar_unity).
 
 4. Start and run the SampleScene in Unity project. This should automatically start the Android app and receive data from it.
+   
+5. Hold the device vertically and capture both hands for best tracking.
 
 ## Customization
 To apply hand tracking on your own avatar, follow the below steps:
@@ -35,6 +33,12 @@ To apply hand tracking on your own avatar, follow the below steps:
    - For each of the Hand Rigs, align their transform with the `Tip` transform. To do so, select that object and hold control select object assign in `Tip`. Then, navigate to menu: `Animation Rigging` -> `Align Transform`
 
 2. Adjust the position and rotation of the prefab `HandLandmarkSet` to fit with the model.
+   
+3. Update the `Adb Path` in `LandmarkSocketManager` of `HandLandmarkSet`. The path should have patterns similar to one of the belows:
+
+   - `C:\Unity\2019.4.6f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools\adb.exe`
+
+   - `C:\Users\user\AppData\Local\Android\Sdk\platform-tools\adb.exe`
 
 ## License
 
