@@ -1,7 +1,12 @@
 # Unity Hand Tracking with Mediapipe
 This is a demo of realtime hand tracking and finger tracking in Unity using Mediapipe.
+
 The tracking section is built on Android but a similar approach should also be applicable for desktop or IOS.
-It works by first detecting the hand landmarks by Mediapipe in Android, and then sending the results to PC via protobuf, and finally interpreting the results in PC Unity.
+
+It works by first detecting the hand landmarks by Mediapipe in Android, and then sending the results to PC via adb and protobuf, and finally interpreting the results in PC Unity.
+
+![Hand Landmark Demo](gifs/demo_landmarks.gif)
+![Model Demo](gifs/demo_model.gif)
 
 ## Prerequisites
 * Windows 10 PC recommended
