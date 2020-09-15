@@ -22,6 +22,7 @@ C:\Users\user\AppData\Local\Android\Sdk\platform-tools
 
 3. Install the "UnityHandTracking.apk" to the device: 
 `adb install UnityHandTracking.apk`
+The .apk is included in release. The source code of the apk is available in [mediapipe_multi_hands_tracking_aar_unity](https://github.com/TesseraktZero/mediapipe_multi_hands_tracking_aar_unity).
 
 4. Start and run the SampleScene in Unity project. This should automatically start the Android app and receive data from it.
 
