@@ -1,0 +1,1533 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Accord.Extensions.Math</name>
+    </assembly>
+    <members>
+        <member name="T:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions">
+            <summary>
+            Contain extension methods for the Branch and Bound assignment matching algorithm.
+            <para>See: <a href="https://www.youtube.com/watch?v=WsHgMfgNsHI">Assignment Problem using Branch and Bound</a></para>
+            <para>See: <a href="https://www.youtube.com/watch?v=F4vI_qc_u0Q">Branch and Bound - An Assignment Problem</a></para>
+            <para>See: <a href="http://homepages.ius.edu/RWISMAN/C455/html/notes/Backtracking/BranchandBound.htm">Branch and Bound</a></para>
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.BranchingNode">
+            <summary>
+            Branching node used internally.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.MatchAssigments(System.Double[0:,0:])">
+            <summary>
+            Gets the first optimal assignment matching where the provided cost matrix represents the cost between each (row, column) pair.
+            <para>(Row, column) pairs represent the bipartite graph.</para>
+            </summary>
+            <param name="costs">Cost matrix for each (row, column) pair where infinity costs represent disconnected vertexes.</param>
+            <returns>
+            Assignment matching matrix where true elements represent the pairing.
+            <para>If a row or a column does not contain true value, the corresponding vertex (row/column) is not matched with any other vertex (column/row).</para>
+            </returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.matchAssigments(System.Double[0:,0:])">
+            <summary>
+            Gets the optimal assignment matching where the provided cost matrix represents the cost between each (row, column) pair.
+            <para>(Row, column) pairs represent the bipartite graph.</para>
+            </summary>
+            <param name="costs">Cost matrix for each (row, column) pair where infinity costs represent disconnected vertexes.</param>
+            <returns>The first best solution (terminal node that needs to be backtracked).</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.branchAndSelectMinCostNodes(System.Double[0:,0:],Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.BranchingNode)">
+            <summary>
+            Creates immediate child nodes for the specified node.
+            </summary>
+            <param name="costs">Cost matrix.</param>
+            <param name="node">Node that needs to be branched.</param>
+            <returns>List of feasible immediate child nodes.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.makeNode(System.Double[0:,0:],Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.BranchingNode,System.Int32)">
+            <summary>
+            Makes node by using the specified parent node and the child index (column in the cost matrix).
+            </summary>
+            <param name="costs">Cost matrix.</param>
+            <param name="parent">Parent node.</param>
+            <param name="column">Child index (column in cost matrix).</param>
+            <returns>Node.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.findMinInRowOmmitingTaken(System.Double[0:,0:],System.Int32,System.Boolean[])">
+            <summary>
+            Finds the minimum number inside the cost matrix committing columns that are already taken.
+            </summary>
+            <param name="costs">Cost matrix.</param>
+            <param name="row">The row in the cost matrix.</param>
+            <param name="isColumnTaken">The binary mask which tells which columns are taken (used by other nodes).</param>
+            <returns>Minimum number.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.BranchAndBoundAssigmentExtensions.createRoot(System.Double[0:,0:])">
+            <summary>
+            Creates root node.
+            </summary>
+            <param name="costs">Cost matrix.</param>
+            <returns>Root node.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Angle">
+            <summary>
+            Provides methods for manipulating angle calculation.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Angle.ToDegrees(System.Double,System.Boolean)">
+            <summary>
+            Converts radians to degrees.
+            </summary>
+            <param name="angleRad">Angle in radians.</param>
+            <param name="normalizeDegrees">Returns angle in degrees in rangle [0..359].</param>
+            <returns>Angle in degrees.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Angle.NormalizeDegrees(System.Double)">
+            <summary>
+            Calculates angle in degrees in range [0..360].
+            </summary>
+            <param name="angleDeg">Angle in degrees.</param>
+            <returns>Angle in degrees in range [0..360].</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Angle.ToRadians(System.Double)">
+            <summary>
+            Converts degrees to radians.
+            </summary>
+            <param name="angleDeg">Angle in degrees.</param>
+            <returns>Angle in radians.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Angle.DistanceDeg(System.Double,System.Double)">
+            <summary>
+            Calculates absolute distance in degrees for two angles in degrees.
+            </summary>
+            <param name="angleDegA">First angle in degrees.</param>
+            <param name="angleDegB">Second angle in degrees.</param>
+            <returns>Returns absolute distance in degrees for two angles in degrees.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.RectangleFExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides extension methods for rectangle.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.RectangleFExtensions.Randomize(DotImaging.Primitives2D.RectangleF,AForge.Range,AForge.Range,System.Int32,System.Random)">
+            <summary>
+            Randomizes rectangle position and scale and returns randomized rectangles.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="locationOffset">Minimum location offset for horizontal and vertical direction.</param>
+            <param name="sizeOffset">Minimum size offset for horizontal and vertical direction.</param>
+            <param name="nRandomizedRectangles">Number of randomized rectangles to generate.</param>
+            <param name="rand">Random generator. If null the instance will be generated.</param>
+            <returns>Randomized rectangles.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.RectangleFExtensions.Randomize(DotImaging.Primitives2D.RectangleF,Accord.Extensions.Pair{AForge.Range},Accord.Extensions.Pair{AForge.Range},System.Int32,System.Random)">
+             <summary>
+             Randomizes rectangle position and scale and returns randomized rectangles.
+             </summary>
+             <param name="rect">Rectangle.</param>
+             <param name="locationOffset">Minimum location offset for horizontal and vertical direction respectively.</param>
+             <param name="sizeOffset">Minimum size offset for horizontal and vertical direction respectively.</param>
+             <param name="nRandomizedRectangles">Number of randomized rectangles to generate.</param>
+             <param name="rand">Random generator. If null the instance will be generated.</param>
+             <returns>Randomized rectangles.</returns>
+             <example>
+             var img = new Image&lt;Bgr, byte&gt;(640, 480);
+            
+             var rect = new RectangleF(50, 50, 100, 50);
+            
+             var locationOffsets = new Range(-0.05f, +0.05f);
+             var sizeOffsets = new Range(0.9f, 1.1f);
+             var randomizedRects = rect.Randomize(new Pair&lt;Range&gt;(locationOffsets, locationOffsets), new Pair&lt;Range&gt;(sizeOffsets, sizeOffsets), 5);
+             randomizedRects = randomizedRects.Select(x =&gt; x.SetScaleTo(rect.Size));
+            
+             img.Draw(rect, Bgr8.Red, 3);
+            
+             foreach (var randomizedRect in randomizedRects)
+             {
+                img.Draw(randomizedRect, Bgr8.Green, 1);
+             }
+            
+             ImageBox.Show(img.ToBitmap(), PictureBoxSizeMode.AutoSize);
+             return;
+             </example>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Edge`1">
+            <summary>
+            Represents edge structure in a graph.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Edge`1.#ctor(`0,`0)">
+            <summary>
+            Creates new edge structure using two vertices.
+            </summary>
+            <param name="source">Source vertex.</param>
+            <param name="destination">Destination vertex.</param>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Edge`1.Source">
+            <summary>
+            Gets source vertex.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Edge`1.Destination">
+            <summary>
+            Gets destination (sink) vertex.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Edge`1.Equals(System.Object)">
+            <summary>
+            Compares two objects for equality.
+            </summary>
+            <param name="obj">Other object.</param>
+            <returns>True if two objects are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Edge`1.GetHashCode">
+            <summary>
+            Calculates hash code of the object.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Edge`1.ToString">
+            <summary>
+            Gets object string representation.
+            </summary>
+            <returns>String representation.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Edge`2">
+            <summary>
+            Represents edge structure in a graph and enables to contain user-defined edge information.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+            <typeparam name="TTag">User tag type.</typeparam>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Edge`2.#ctor(`0,`0,`1)">
+            <summary>
+            Creates a new instance from two vertices and a tag. 
+            </summary>
+            <param name="source">Source vertex.</param>
+            <param name="destination">Destination vertex.</param>
+            <param name="tag">USer specifed tag.</param>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Edge`2.Tag">
+            <summary>
+            Gets tag (user specified information) for the edge.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.GraphBaseExtensions">
+            <summary>
+            Graph extension (operates on sparse matrix).
+            <para>All methods can be used as extensions.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.GraphBaseExtensions.GetVertices``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1})">
+            <summary>
+            Gets all vertices from the graph.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+            <typeparam name="TEdge">Edge type.</typeparam>
+            <param name="graph">Graph.</param>
+            <returns>Collection of vertices.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.GraphBaseExtensions.GetVertices``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Gets all vertices from the graph.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+            <typeparam name="TEdge">Edge type.</typeparam>
+            <param name="edges">Collection of edges.</param>
+            <returns>Collection of vertices.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.GraphBaseExtensions.ToGraph``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Constructs the graph from the provided edges.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+            <typeparam name="TEdge">Edge type.</typeparam>
+            <param name="edges">Collection of edges.</param>
+            <returns>Graph.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.GraphBaseExtensions.AddOrUpdateEdge``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``1)">
+            <summary>
+            Adds edge to the graph.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+            <typeparam name="TEdge">Edge type.</typeparam>
+            <param name="graph">Graph.</param>
+            <param name="edge">Edge to add.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.GraphBaseExtensions.RemoveEdge``3(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``1)">
+            <summary>
+            Removes edge from the graph.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+            <typeparam name="TEdge">Edge type.</typeparam>
+            <typeparam name="TEdgeCollection">Edge collection type.</typeparam>
+            <param name="graph">Graph.</param>
+            <param name="edge">Edge to remove.</param>
+            <returns>True if the edge is removed, false otherwise.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.FloydWarshallExtensions">
+            <summary>
+            Implements Floyd-Warshall algorithm as an extension function.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.FloydWarshallExtensions.FindShortestPaths``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},System.Func{``1,System.Double},System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},System.Double}@)">
+            <summary>
+            Finds all shortest paths for-each vertex pair withing the given graph by using Floyd-Warshall algorithm.
+            See <a href="http://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm" /> for details.
+            </summary>
+            <typeparam name="TVertex">Vertex type.</typeparam>
+            <typeparam name="TEdge">Edge type.</typeparam>
+            <param name="graph">Graph.</param>
+            <param name="distanceFunc">Distance function between two vertices.</param>
+            <param name="costMat">Cost matrix.</param>
+            <returns>2D matrix where each element is path from a source to a destination.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.RectangleClustering">
+            <summary>
+            Represents the group matcher for rectangles.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.RectangleClustering.#ctor(System.Single,System.Single)">
+            <summary>
+            Constructs new rectangle clustering.
+            </summary>
+            <param name="minGroupWeight">
+            Minimum group weight threshold. Group with less than <paramref name="minGroupWeight"/> will be discarded.
+            <para>If the all weights are equal to one, the <paramref name="minGroupWeight"/> represents the minimum number of neighbors.</para>
+            <param name="minRectangleAreaOverlap">Minimum bounding rectangle overlap area represented as percentage [0..1].</param>
+            </param>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.RectangleClustering.MinRectangleAreaOverlap">
+            <summary>
+            Minimum bounding rectangle overlap area represented as percentage [0..1].
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.RectangleClustering.GetRepresentative(System.Collections.Generic.IList{DotImaging.Primitives2D.Rectangle},System.Collections.Generic.IList{System.Single})">
+            <summary>
+            Calculates representative as weighted average.
+            </summary>
+            <param name="rects">Rectangles within cluster.</param>
+            <param name="weights">Rectangles' importance.</param>
+            <returns>Cluster representative.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.RectangleClustering.AreDetectionsAdjacent(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Determines whether rectangles should belong to one cluster or not.
+            </summary>
+            <param name="r1">First rectangle.</param>
+            <param name="r2">Second rectangle.</param>
+            <returns>True if the rectangles are near, false otherwise.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Point`1">
+            <summary>
+            Represents generic point
+            </summary>
+            <typeparam name="T">Blittable type.</typeparam>
+        </member>
+        <member name="F:Accord.Extensions.Math.Geometry.Point`1.X">
+            <summary>
+            Gets or sets X coordinate.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.Geometry.Point`1.Y">
+            <summary>
+            Gets or sets Y coordinate.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Point`1.Equals(System.Object)">
+            <summary>
+            Determines whether the provided object is equal to the current object.
+            </summary>
+            <param name="obj">Other object to compare with.</param>
+            <returns>True if the two objects are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Point`1.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Point`1.ToString">
+            <summary>
+            Gets the string representation of the object.
+            </summary>
+            <returns>String representation.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.CardinalSpline">
+            <summary>
+            Represents cardinal cubic spline which is a type of C(1) interpolating spline made up of cubic polynomial segments.
+            <remarks>
+            See: 
+            <para><a href="http://research.cs.wisc.edu/graphics/Courses/559-f2004/docs/cs559-splines.pdf"/></para> and
+            <para><a href="http://www.intelligence.tuc.gr/~petrakis/courses/computervision/splines.pdf"/></para>.
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.Geometry.CardinalSpline.MIN_INDEX">
+            <summary>
+            Minimal point index of the cardinal spline.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.Geometry.CardinalSpline.MAX_INDEX_OFFSET">
+            <summary>
+            Offset from the maximal index.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.Geometry.CardinalSpline.NUM_DERIVATIVE_POINTS">
+            <summary>
+            Number of points which are used for interpolation.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.#ctor(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF},System.Single,System.Boolean)">
+            <summary>
+            Creates cardinal spline.
+            </summary>
+            <param name="controlPoints">Control points for the curve.</param>
+            <param name="tension">User specified tension.</param>
+            <param name="addTensionPoints">Adds first and last control point so that current border point can be also interpreted as part of a contour.</param>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.CardinalSpline.ControlPoints">
+            <summary>
+            Gets the total number of points.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.CardinalSpline.Tension">
+            <summary>
+            Tension. 
+            <para>
+            Value 1 gives linear interpolation.
+            Values smaller than 1 gives greater contour "exterior" tension. 
+            Values greater than 1 give greater contour "interior" tension.
+            </para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.CardinalSpline.Count">
+            <summary>
+            Gets the total number of points.
+            <para>The total number of points that can be used for interpolation is totalNumber - <see cref="F:Accord.Extensions.Math.Geometry.CardinalSpline.NUM_DERIVATIVE_POINTS"/></para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.InterpolateAt(System.Single)">
+            <summary>
+            Interpolates four control points.
+            </summary>
+            <param name="index">Index between two control points.</param>
+            <returns>Interpolated point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.DerivativeAt(System.Single)">
+            <summary>
+            Gets derivative at specified index.
+            </summary>
+            <param name="index">Index between two control points.</param>
+            <returns>Derivative at interpolated point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.NormalAt(System.Single)">
+            <summary>
+            Gets normal direction at specified point.
+            </summary>
+            <param name="index">Index between two control points.</param>
+            <returns>Normal direction at interpolated point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.Clone">
+            <summary>
+            Clones this curvature. Curvature points are not shared.
+            </summary>
+            <returns>New cloned curvature.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.InterpolateAt(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Single)">
+            <summary>
+            Interpolates four control points.
+            </summary>
+            <param name="controlPoints">Control points of the spline.</param>
+            <param name="tension">Tension of the spline.</param>
+            <param name="index">Index between two control points.</param>
+            <returns>Interpolated point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.InterpolateAt(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Collections.Generic.IEnumerable{System.Single})">
+            <summary>
+            Interpolates points and defined indices.
+            </summary>
+            <param name="controlPoints">Control points of the spline.</param>
+            <param name="tension">Tension of the spline.</param>
+            <param name="indices">Indices where to interpolate values.</param>
+            <returns>Interpolated points.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.Interpolate(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Single)">
+            <summary>
+            Interpolates at indices which are obtained using <paramref name="samplingStep"/>.
+            <para>Distances between points do not have to be equal because control points may not be equally distributed.</para>
+            <para>For equally distributed points please use: <seealso cref="M:Accord.Extensions.Math.Geometry.CardinalSpline.GetEqualyDistributedPointIndices(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Int32,System.Single)"/>.</para>
+            </summary>
+            <param name="controlPoints">Control points of the spline.</param>
+            <param name="tension">Tension of the spline.</param>
+            <param name="samplingStep">Index increase factor.</param>
+            <returns>Interpolated points.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.DerivativeAt(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Single,System.Boolean)">
+            <summary>
+            Gets derivative at specified index.
+            </summary>
+            <param name="controlPoints">Control points of the spline.</param>
+            <param name="tension">Tension of the spline.</param>
+            <param name="index">Index between two control points.</param>
+            <param name="approxAtControlPoint">Derivation in control point is zero. 
+            If true a small offset will be used to avoid zero-point result if a point is control point.</param>
+            <returns>Derivative at interpolated point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.NormalAt(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Single,System.Boolean)">
+            <summary>
+            Gets normal direction at specified point.
+            </summary>
+            <param name="controlPoints">Control points of the spline.</param>
+            <param name="tension">Tension of the spline.</param>
+            <param name="index">Index between two control points.</param>
+            <param name="approxAtControlPoint">If true a small offset will be used to avoid zero-point result if a point is control point.</param>
+            <returns>Normal direction at interpolated point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.GetEqualyDistributedPointIndices(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Int32,System.Single)">
+            <summary>
+            Gets indices for which points are evenly distributed along contour.
+            <para>A rough estimation is made at resolution: <paramref name="samplingStep"/> (index step).</para>
+            </summary>
+            <param name="controlPoints">Control points of the spline.</param>
+            <param name="tension">Tension of the spline.</param>
+            <param name="numPoints">Number of requested points.</param>
+            <param name="samplingStep">Sampling resolution for calculating contour length. 
+            <para>Distance between two points will be more accurate if the provided value is lower (sampling resolution is higher). The provided value should be fine for most splines.</para>
+            <para>If the spline is "very curvy" set it to a lower value. To increase performance set it to a higher one (e.g. 1).</para>
+            <para>Interval [0..1].</para>
+            </param>
+            <returns>Indices for which points are evenly distributed.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.ValidIndicesRange(System.Int32)">
+            <summary>
+            Gets valid indices range for interpolation.
+            <para>Valid range is: [MIN_INDEX.. (count-1+MAX_INDEX_OFFSET - epsilon)]</para>
+            </summary>
+            <param name="controlPointsCount">Control points count.</param>
+            <returns>Valid indices range for interpolation.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.AddTensionPoints(System.Collections.Generic.List{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Adds first and last control point so that current border point can be also interpreted as part of a contour.
+            <para>Those new points will be added as reflected penultimate points over the last (border) control points.</para>
+            </summary>
+            <param name="controlPoints">Control points.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.CardinalSpline.reflectPoint(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Reflect point over reflector point.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i">
+            <summary>
+            Contour extensions
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.GetPathLength(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Int32,System.Int32,System.Collections.Generic.List{System.Single})">
+            <summary>
+            Gets path length between specified points.
+            </summary>
+            <param name="pts">Point collection.</param>
+            <param name="pA">Start point.</param>
+            <param name="pB">End point.</param>
+            <param name="cumulativePathLength">Contour cumulative path length.</param>
+            <returns>Distance from start to end point (by following contour points).</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.CumulativeEuclideanDistance(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Boolean)">
+            <summary>
+            Gets cumulative distance for a contour (threated as closed contour).
+            </summary>
+            <param name="pts">Contour.</param>
+            <param name="treatAsClosed">Treat as closed contour (distance from the last to the first point is added).</param>
+            <returns>Cumulative distance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.GetClosestPoint(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets closest point to the <paramref name="ptIdx"/> starting from a <paramref name="startIdx"/> moving in the <paramref name="direction"/>.
+            Scale <paramref name="scale"/> is used to avoid local minima if contour is noisy.
+            </summary>
+            <param name="contour">Contour.</param>
+            <param name="ptIdx">Point index for which to find the closest point.</param>
+            <param name="startIdx">Start point from which the search begins.</param>
+            <param name="direction">Search direction. If &gt; 0 then search continues in the positive direction, if &lt; 0 then search is continued toward negative indexes.</param>
+            <param name="scale">A good value is ~15. A specified region will be searched every time to avoid local minima.</param>
+            <returns>Closest point index regarding <paramref name="ptIdx"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.GetClosestPoint(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Int32,System.Int32,System.Int32,System.Int32,System.Double@)">
+            <summary>
+            Gets closest point to the <paramref name="ptIdx"/> starting from a <paramref name="startIdx"/> moving in the <paramref name="direction"/>.
+            Scale <paramref name="scale"/> is used to avoid local minima if contour is noisy.
+            </summary>
+            <param name="contour">Contour.</param>
+            <param name="ptIdx">Point index for which to find the closest point.</param>
+            <param name="startIdx">Start point from which the search begins.</param>
+            <param name="direction">Search direction. If &gt; 0 then search continues in the positive direction, if &lt; 0 then search is continued toward negative indexes.</param>
+            <param name="scale">A good value is ~15. A specified region will be searched every time to avoid local minima.</param>
+            <param name="distance">Distance from <paramref name="ptIdx"/> to returned point index.</param>
+            <returns>Closest point index regarding <paramref name="ptIdx"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.GetClosestPoint(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Int32,AForge.IntRange,System.Double@)">
+            <summary>
+            Gets closest point to the <paramref name="ptIdx"/>.
+            </summary>
+            <param name="contour">Contour.</param>
+            <param name="ptIdx">Point index for which to find the closest point.</param>
+            <param name="searchSegment">Contour segment to search.</param>
+            <param name="distance">Distance from <paramref name="ptIdx"/> to returned point index.</param>
+            <returns>Closest point index regarding <paramref name="ptIdx"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.FindExtremaIndices(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Func{System.Single,System.Boolean,System.Boolean},System.Int32,System.Collections.Generic.List{System.Int32}@,System.Collections.Generic.List{System.Int32}@)">
+             <summary>
+             Finds valeys and peaks.
+             </summary>
+             <param name="contourPts">Contour.</param>
+             <param name="selector">Filter function where peak or valey is choosen. Angle range can be determined also. </param>
+             <param name="scale">A good value is ~15. A specified amount will be skipped every time to avoid local minima.</param>
+             <param name="peaks">Found peaks.</param>
+             <param name="valeys">Found valeys.</param>
+             <remarks>
+             Sample usage:
+             <code>
+                 contourPts.FindExtremaIndices((angle, isPeak)=>
+                 {
+                     if ((isPeak AND angle ;gt 0 AND angle ;lt 90) || //peak filtering
+                         (!isPeak AND angle ;gt 0 AND angle ;lt 90))  //valey filtering
+                         return true;
+            
+                     return false;
+                 }, 
+                 scale, out peakIndeces, out valeyIndeces);
+             </code>
+             </remarks>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.GetHumps(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32},System.Int32,System.Collections.Generic.List{System.Int32}@)">
+            <summary>
+            Finds humps in contour. Hump scale is determined by <paramref name="scale"/>. 
+            <para>For each peak a closest valley is found. Next for that valley a closet point is found. Those three point make hump.</para>
+            <para>Hump searching will be successful even when only one peak and one valley are found; it can be successful where peak and valley search against convex hull does not give good results.</para>
+            <para></para>Peaks and valleys can be obtained by using <see cref="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.FindExtremaIndices(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Func{System.Single,System.Boolean,System.Boolean},System.Int32,System.Collections.Generic.List{System.Int32}@,System.Collections.Generic.List{System.Int32}@)"/>.
+            </summary>
+            <param name="contour">Contour.</param>
+            <param name="peaks">Peaks.</param>
+            <param name="valeys">Valleys.</param>
+            <param name="scale">Used for <see cref="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.GetClosestPoint(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Int32,System.Int32,System.Int32,System.Int32)"/>. A good value is ~20. A specified region will be searched every time to avoid local minimum.</param>
+            <param name="humpPeaks">Found hump peaks.</param>
+            <returns>Humps contour indexes.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.ClusterPoints(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Collections.Generic.List{System.Int32},System.Double,System.Collections.Generic.List{System.Single})">
+            <summary>
+            Clusters points. Maximum successive distance between two points is specified by <paramref name="clusterRange"/>.
+            <para>Points must be ordered!. </para>
+            Can be useful to group data after <see cref="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.FindExtremaIndices(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Func{System.Single,System.Boolean,System.Boolean},System.Int32,System.Collections.Generic.List{System.Int32}@,System.Collections.Generic.List{System.Int32}@)"/> is used.
+            </summary>
+            <param name="contour">Contour.</param>
+            <param name="ptIndeces">Point indexes.</param>
+            <param name="clusterRange">Maximum successive point distance.</param>
+            <param name="cumulativeDistance">Cumulative contour distance. If not specified it will be automatically calculated.</param>
+            <returns>Point clusters.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.SortPointsClockwise(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point})">
+            <summary>
+            Order the points clockwise starting from the 12 o'clock. 
+            </summary>
+            <param name="points">Points to sort clockwise</param>
+            <returns>Sorted point indexes.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.BoundingRect(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point})">
+            <summary>
+            Gets the minimum bounding rectangle around the points.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>Bounding rectangle.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.Center(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point})">
+            <summary>
+            Gets the center of the mass of the contour.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>The center of the mass of the contour.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32i.IsRectangle(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point})">
+            <summary>
+            Determines whether the polygon forms rectangle.
+            </summary>
+            <param name="points">Polygon.</param>
+            <returns>True if the polygon forms rectangle, false otherwise.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.ContourExtensions_Point32f">
+            <summary>
+            Contour extensions
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32f.SortPointsClockwise(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Order the points clockwise starting from the 12 o'clock. 
+            </summary>
+            <param name="points">Points to sort clockwise</param>
+            <returns>Sorted point indexes.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32f.CumulativeEuclideanDistance(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Boolean)">
+            <summary>
+            Gets cumulative distance for a contour (threated as closed contour).
+            </summary>
+            <param name="pts">Contour.</param>
+            <param name="treatAsClosed">Treat as closed contour (distance from the last to the first point is added).</param>
+            <returns>Cumulative distance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32f.BoundingRect(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Gets the minimum bounding rectangle around the points.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>Bounding rectangle.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32f.Center(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Gets the center of the mass of the contour.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>The center of the mass of the contour.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32f.GetEqualyDistributedPoints(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Gets equaly distributed points allong a contour.
+            </summary>
+            <param name="points">Contout points.</param>
+            <param name="numberOfPoints">Number of points to take.</param>
+            <param name="treatAsClosed">Treat contour as closed meaning that the distance between the last and the first point will be also calculated.</param>
+            <param name="takeFirstPoint">Force to include the first point. Otherwise it may not be included.</param>
+            <returns>Equaly distibuted points.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.ContourExtensions_Point32f.IsRectangle(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Determines whether the polygon forms rectangle.
+            </summary>
+            <param name="points">Polygon.</param>
+            <returns>True if the polygon forms rectangle, false otherwise.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Cluster`1">
+            <summary>
+            Represents collections of elements in one group.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Cluster`1.#ctor(System.Collections.Generic.IList{`0},System.Collections.Generic.IList{System.Single},`0)">
+            <summary>
+            Creates a new cluster instance.
+            </summary>
+            <param name="detections">Detections.</param>
+            <param name="detectionWeights">Detection importance factors. Must be non-negative.</param>
+            <param name="representative">Representative element for the cluster.</param>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Cluster`1.Neighbours">
+            <summary>
+            Gets the number of neighbors within a group.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Cluster`1.Detections">
+            <summary>
+            Gets the collection of elements within the group.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Cluster`1.Weights">
+            <summary>
+            Detection importance weights.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Cluster`1.Representative">
+            <summary>
+            Gets the group representative chosen by average function in group matching algorithm.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Cluster`1.CumulativeWeight">
+            <summary>
+            Cumulative weight for the group.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Clustering`1">
+            <summary>
+              Group matching algorithm for detection region averaging.
+            </summary>
+            <remarks>
+              This class can be seen as a post-processing filter. Its goal is to
+              group near or contained regions together in order to produce more
+              robust and smooth estimates of the detected regions.
+            </remarks>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Clustering`1.#ctor(System.Single)">
+            <summary>
+            Creates a new group matcher.
+            </summary>
+            <param name="minGroupWeight">
+            Minimum group weight threshold. Group with less than <paramref name="minGroupWeight"/> will be discarded.
+            <para>If the all weights are equal to one, the <paramref name="minGroupWeight"/> represents the minimum number of neighbors.</para>
+            </param>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Clustering`1.MinGroupWeight">
+            <summary>
+            Minimum group weight threshold. Group with less than minimum group weight will be discarded.
+            <para>If the all weights are equal to one, the minimum group weight represents the minimum number of neighbors.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Clustering`1.Group(System.Collections.Generic.IList{`0})">
+            <summary>
+            Groups detections. All weights are set to one.
+            </summary>
+            <param name="detections">Detections.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Clustering`1.Group(System.Collections.Generic.IList{`0},System.Collections.Generic.IList{System.Single})">
+            <summary>
+            Groups weighted detections.
+            </summary>
+            <param name="detections">Detections.</param>
+            <param name="detectionWeights">Detection importance weights.</param>
+            <returns>Groups.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Clustering`1.markNodes(System.Collections.Generic.IList{`0},System.Int32[],System.Int32)">
+            <summary>
+            Marks visited vertices by applying depth first search.
+            </summary>
+            <param name="vertices">Vertices.</param>
+            <param name="labels">Cluster labels.</param>
+            <param name="startNodeIndex">Start node.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Clustering`1.GetRepresentative(System.Collections.Generic.IList{`0},System.Collections.Generic.IList{System.Single})">
+            <summary>
+            The function for getting representative of the group.
+            </summary>
+            <param name="samples">Detections.</param>
+            <param name="weights">Detection weights.</param>
+            <returns>The group representative.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Clustering`1.AreDetectionsAdjacent(`0,`0)">
+            <summary>
+            Function that checks whether two detections are adjacent.
+            </summary>
+            <param name="sampleA">First sample.</param>
+            <param name="sampleB">Second sample.</param>
+            <returns>True if two detections are adjacent, false otherwise.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.PointTransfromationsExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides extension methods for point collection transfromation.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.PointTransfromationsExtensions.Transform(Accord.Math.Point3,System.Single[0:,0:])">
+            <summary>
+            Transfroms 3D point by using transformation matrix (3x3)
+            </summary>
+            <param name="point">Point to transform</param>
+            <param name="transformationMat">Transformation matrix</param>
+            <returns>Transformed point</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.PointTransfromationsExtensions.Project(Accord.Math.Point3,Accord.Math.Point3)">
+            <summary>
+            Projects point regarding camera.
+            </summary>
+            <param name="point">Point to project.</param>
+            <param name="camera">Camera position (default is (0,0,0))</param>
+            <returns>Projected point</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.PointTransfromationsExtensions.Transform(DotImaging.Primitives2D.PointF,System.Single[0:,0:],Accord.Math.Point3)">
+            <summary>
+            Transforms 3D point to 2D point using transformation matrix and projection regarding camera position.
+            </summary>
+            <param name="point">Point to transform.</param>
+            <param name="transformationMat">Transformation matrix (3x3).</param>
+            <param name="camera">Camera position. Default is (0,0,0).</param>
+            <returns>Transformed point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.PointTransfromationsExtensions.Transform(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF},System.Single[0:,0:])">
+            <summary>
+            Transfroms each points in the specified collection according to transformation matrix (3x3).
+            </summary>
+            <param name="points">Contour points.</param>
+            <param name="transformationMat">Transfromation matrix.</param>
+            <returns>Transfromed points.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.PointTransfromationsExtensions.Normalize(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Normalizes point cloud to range [-1..1]. Ratios will be preserved.
+            <para>A bounding rectangle will be determined and then </para>
+            <para>  1) points will be translated for (rect center X, rect center Y)</para>
+            <para>  2) and then rescaled for (1/scale, 1/scale) where scale is max(width, height).</para>
+            </summary>
+            <param name="points">Points to normalize.</param>
+            <returns>Normalized points.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Transforms2D">
+            <summary>
+            Contains methods for geometric transformations.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Transforms2D.Rotation(System.Single)">
+            <summary>
+            Gets the 3x3 rotation matrix.
+            </summary>
+            <param name="angleRad">Rotation angle in radians.</param>
+            <returns>Rotation matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Transforms2D.Translation(System.Single,System.Single)">
+            <summary>
+            Gets the 3x3 translation matrix.
+            </summary>
+            <param name="x">Horizontal offset.</param>
+            <param name="y">Vertical offset.</param>
+            <returns>Translation matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Transforms2D.Scale(System.Single,System.Single,System.Single)">
+            <summary>
+            Gets the 3x3 scale matrix.
+            </summary>
+            <param name="x">Horizontal scale.</param>
+            <param name="y">Vertical scale.</param>
+            <param name="z">Depth scale.</param>
+            <returns>Scale matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Transforms2D.Combine(System.Single[0:,0:][])">
+            <summary>
+            Multiplies transforms starting from the last one to the first one (stack).
+            Transforms are given by priority.
+            </summary>
+            <param name="transforms">Transfrom matrices.</param>
+            <returns>Combined transfrom matrix.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.RangeExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides extension methods for <see cref="T:AForge.IntRange"/>.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.RangeExtensions.IsInside(AForge.IntRange,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Determines whether the specified values are inside the range.
+            </summary>
+            <param name="range">Range.</param>
+            <param name="values">Values.</param>
+            <returns>Collection where each element is set to true if the corresponding value is in the range, otherwise is set to false.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Geometry.Vector2D">
+            <summary>
+            Represents 2D Vector structure.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.Geometry.Vector2D.Empty">
+            <summary>
+            Gets an empty 2D vector.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates new <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/> structure.
+            </summary>
+            <param name="directionX">Horizontal component.</param>
+            <param name="directionY">Vertical component.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.#ctor(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Creates new <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/> structure.
+            </summary>
+            <param name="startPoint">Start point.</param>
+            <param name="endPoint">End point.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.#ctor(System.Double,System.Single)">
+            <summary>
+            Creates new <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/> structure.
+            </summary>
+            <param name="angleRad">Vector direction angle in radians.</param>
+            <param name="scale">Vector scale.</param>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Vector2D.X">
+            <summary>
+            Gets the horizontal vector component.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Vector2D.Y">
+            <summary>
+            Gets the vertical vector component.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Math.Geometry.Vector2D.Length">
+            <summary>
+            Gets the vector magnitude.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Negate">
+            <summary>
+            Changes vector direction.
+            </summary>
+            <returns>Negated vector.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Normalize">
+            <summary>
+            Normalizes the vector with its length and produces a new vector.
+            </summary>
+            <returns>Normalized vector.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Angle(Accord.Extensions.Math.Geometry.Vector2D,Accord.Extensions.Math.Geometry.Vector2D)">
+            <summary>
+            Calculates angle between vectors (in radians).
+            <seealso cref="M:Accord.Extensions.Math.Geometry.Vector2D.Angle(Accord.Extensions.Math.Geometry.Vector2D,Accord.Extensions.Math.Geometry.Vector2D)"/>
+            </summary>
+            <param name="v1">First vector.</param>
+            <param name="v2">Second vector.</param>
+            <returns>Angle between vectors in radians.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.DotProduct(Accord.Extensions.Math.Geometry.Vector2D,Accord.Extensions.Math.Geometry.Vector2D)">
+            <summary>
+            Calculates vectors dot product.
+            </summary>
+            <param name="v1">First vector.</param>
+            <param name="v2">Second vector.</param>
+            <returns>Dot product magnitude.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.CrossProduct(Accord.Extensions.Math.Geometry.Vector2D,Accord.Extensions.Math.Geometry.Vector2D)">
+            <summary>
+            Vector obtained by cross product in 2D is facing toward Z direction (other coordinates are zero)
+            </summary>
+            <param name="v1">First vector</param>
+            <param name="v2">Second vector</param>
+            <returns>Vector signed magnitude in Z direction.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.AreOpositeDirection(Accord.Extensions.Math.Geometry.Vector2D,Accord.Extensions.Math.Geometry.Vector2D)">
+            <summary>
+            Gets whether two vectors have opposite directions or not.
+            </summary>
+            <param name="v1">First vector</param>
+            <param name="v2">Second vector</param>
+            <returns>True if two vectors have opposite directions, otherwise false.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.op_Explicit(DotImaging.Primitives2D.PointF)~Accord.Extensions.Math.Geometry.Vector2D">
+            <summary>
+            Converts direction represented as point into vector.
+            </summary>
+            <param name="direction">Vector direction.</param>
+            <returns>New <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Add(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Adds point and <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.
+            </summary>
+            <param name="point">Point.</param>
+            <returns> Translated point.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Add(DotImaging.Primitives2D.PointF,Accord.Extensions.Math.Geometry.Vector2D)">
+            <summary>
+            Adds point and <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.
+            </summary>
+            <param name="point">Point.</param>
+            <param name="vector">Vector.</param>
+            <returns> Translated point. </returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.op_Addition(DotImaging.Primitives2D.PointF,Accord.Extensions.Math.Geometry.Vector2D)">
+            <summary>
+            Adds point and <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.
+            </summary>
+            <param name="point">Point.</param>
+            <param name="vector">Vector.</param>
+            <returns> Translated point. </returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Multiply(System.Single)">
+            <summary>
+            Multiplies vector and scale.
+            </summary>
+            <param name="scale">Scale</param>
+            <returns>New scaled <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Multiply(Accord.Extensions.Math.Geometry.Vector2D,System.Single)">
+            <summary>
+            Multiplies vector and scale.
+            </summary>
+            <param name="vector"><see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.</param>
+            <param name="scale">Scale</param>
+            <returns>New scaled <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.op_Multiply(Accord.Extensions.Math.Geometry.Vector2D,System.Single)">
+            <summary>
+            Multiplies vector and scale.
+            </summary>
+            <param name="vector"><see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.</param>
+            <param name="scale">Scale</param>
+            <returns>New scaled <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.Equals(System.Object)">
+            <summary>
+            Gets whether the specified object has the same data as this object.
+            </summary>
+            <param name="obj">Specified object.</param>
+            <returns>True if the objects are equal.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.GetHashCode">
+            <summary>
+            Gets object hash code.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.Geometry.Vector2D.op_Explicit(Accord.Extensions.Math.Geometry.Vector2D)~DotImaging.Primitives2D.PointF">
+            <summary>
+            Converts <see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/> to point that represents direction.
+            </summary>
+            <param name="vector"><see cref="T:Accord.Extensions.Math.Geometry.Vector2D"/> structure.</param>
+            <returns>Direction as point.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.Complex">
+            <summary>
+            Represents complex number.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.Complex.Re">
+            <summary>
+            Real part of the complex number.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.Complex.Im">
+            <summary>
+            Imaginary part of the complex number.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.Complex.#ctor(System.Double,System.Double)">
+            <summary>
+            Creates a new instance of <see cref="T:Accord.Extensions.Math.Complex"/> structure.
+            </summary>
+            <param name="re">Real part.</param>
+            <param name="im">Imaginary part.</param>
+        </member>
+        <member name="T:Accord.Extensions.Math.MatrixExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides matrix extension methods for 2D arrays.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.GetSize``1(``0[0:,0:])">
+            <summary>
+            For a given matrix returns number of rows and columns in the form [rows, columns]
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.ColumnCount``1(``0[0:,0:])">
+            <summary>
+            For a given matrix returns number of columns.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.RowCount``1(``0[0:,0:])">
+            <summary>
+            For a given matrix returns number of rows.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.IsEmpty``1(``0[0:,0:])">
+            <summary>
+            Checks whether the matrix has number of elements greater than zero.
+            </summary>
+            <returns>True if the matrix is empty, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.DefaultIfEmpty``1(``0[0:,0:],``0[0:,0:])">
+            <summary>
+            Checks if the matrix is empty and returns default value if the matrix is empty.
+            </summary>
+            <param name="matrix">Matrix.</param>
+            <param name="defaultValue">Default value to return if the matrix is empty.</param>
+            <returns>Source matrix if the matrix is not empty, default value otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.DefaultIfEmpty``1(``0[0:,0:])">
+            <summary>
+            Checks if the matrix is empty and returns empty 2D array if the matrix is empty.
+            </summary>
+            <returns>Source matrix if the matrix is not empty, empty array otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.GetAt``1(``0[0:,0:],System.Int32[][])">
+            <summary>
+            Gets the elements specified by indices.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="matrix">Matrix.</param>
+            <param name="indices">Indices of requested elements (collection of (row col) pairs).</param>
+            <returns>Elements specified by indices</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.SetAt``1(``0[0:,0:],System.Int32[][],System.Func{``0,``0})">
+            <summary>
+            Sets the elements specified by indices.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="matrix">Matrix.</param>
+            <param name="indices">Indices of requested elements (collection of (row col) pairs).</param>
+            <param name="setter">
+            Element setter.
+            params: value of the element
+            returns: new value
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.IsMultipliableBy(System.Double[0:,0:],System.Double[0:,0:])">
+            <summary>
+            For a given matrix returns if two matrices can be multiplied. 
+            </summary>
+            <param name="leftMatrix">Left matrix</param>
+            <param name="rightMatrix">Right matrix</param>
+            <returns>Whether can be multiplied or not.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.Mean(System.Double[0:,0:])">
+            <summary>
+            Gets the mean value for each column.
+            </summary>
+            <param name="matrix">Matrix.</param>
+            <returns>The mean value for each matrix column.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.Covariance(System.Double[0:,0:],System.Double[])">
+            <summary>
+            Gets the covariance of the matrix.
+            Each matrix row represents a state. The result has the size of: [state x state].
+            </summary>
+            <param name="matrix">Matrix.</param>
+            <param name="means">Mean value for each column.</param>
+            <returns>The covariance matrix of size: [state x state].</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.Covariance(System.Double[0:,0:])">
+            <summary>
+            Gets the covariance of the matrix (means are calculated internally) See function overloads.
+            Each matrix row represents a state. The result has the size of: [state x state].
+            </summary>
+            <param name="matrix">Matrix.</param>
+            <returns>The covariance matrix of size: [state x state].</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.ToMatrix``1(System.Collections.Generic.IEnumerable{``0[]})">
+            <summary>
+            Converts collection of matrix rows to 2D matrix.
+            Each row must have the same length.
+            </summary>
+            <param name="matrixRows">Collection of matrix rows.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.ToDiagonalMatrix``1(``0[])">
+            <summary>
+            Creates a diagonal matrix from a supplied vector.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="vector">Vector to convert to diagonal matrix.</param>
+            <returns>Diagonal matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.Multiply(System.Double[],System.Double[])">
+            <summary>
+            Multiplies two vector (column  vector * row vector) resulting in 2D matrix. 
+            </summary>
+            <param name="columnVector">Column vector [n x 1].</param>
+            <param name="rowVector">Row vector [1 x n].</param>
+            <returns>Multiplication result.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.GetAssociations(System.Boolean[0:,0:],System.Collections.Generic.List{System.Int32}@,System.Collections.Generic.List{System.Int32}@)">
+            <summary>
+            Gets the associations, unassociated rows and unassociated columns from the provided association matrix which represents the connected graph.
+            </summary>
+            <param name="associationMat">Association matrix where true values represent the connection.</param>
+            <param name="unassociatedRows">Unassociated rows.</param>
+            <param name="unassociatedColumns">Unassociated columns.</param>
+            <returns>Associated row-column pairs.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.Divide(System.Single[0:,0:],System.Single,System.Boolean)">
+            <summary>
+            Divides each matrix element with the specified value.
+            </summary>
+            <param name="matrix">Matrix.</param>
+            <param name="value">Denominator.</param>
+            <param name="inPlace">True to perform the operation in place, false otherwise.</param>
+            <returns>Result matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.GetColumn``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IList{``0}},System.Int32)">
+            <summary>
+            Gets jagged matrix column elements.
+            </summary>
+            <exception cref="T:System.ArgumentException">Column index is out of range.</exception>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="jaggedMatrix">Jagged matrix.</param>
+            <param name="columnIndex">Column index.</param>
+            <returns>Column elements.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MatrixExtensions.ToJaggedMatrix``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Converts vector to one-column jagged matrix representation.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="vector">Vector.</param>
+            <returns>One-column jagged matrix.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.FourierTransform">
+             <summary>
+             AForge Math Library
+             AForge.NET framework
+             http://www.aforgenet.com/framework/
+            
+             Copyright © Andrew Kirillov, 2005-2009
+             andrew.kirillov@aforgenet.com
+             
+             FFT idea from Exocortex.DSP library
+             http://www.exocortex.org/dsp/
+             
+             Copyright © Darko Jurić
+             darko.juric2@gmail.com
+             The class is taken from http://www.aforgenet.com/framework/ and modified to support parallel execution and optimized (pointers).
+             </summary>
+        </member>
+        <member name="T:Accord.Extensions.Math.FourierTransform.Direction">
+            <summary>
+            Fourier transformation direction.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.FourierTransform.Direction.Forward">
+            <summary>
+            Forward direction of Fourier transformation.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.FourierTransform.Direction.Backward">
+            <summary>
+            Backward direction of Fourier transformation.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.FourierTransform.FFT(Accord.Extensions.Math.ComplexF[],Accord.Extensions.Math.FourierTransform.Direction)">
+            <summary>
+            One dimensional Fast Fourier Transform.
+            </summary>
+            <param name="data">Data to transform.</param>
+            <param name="direction">Transformation direction.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.FourierTransform.FFT(Accord.Extensions.Math.ComplexF*,System.Int32,Accord.Extensions.Math.FourierTransform.Direction)">
+            <summary>
+            One dimensional Fast Fourier Transform.
+            </summary>
+            
+            <param name="data">Data to transform.</param>
+            <param name="length">Array length.</param>
+            <param name="direction">Transformation direction.</param>
+            
+            <remarks><para><note>The method accepts <paramref name="data"/> array of 2<sup>n</sup> size
+            only, where <b>n</b> may vary in the [1, 14] range.</note></para></remarks>
+            
+            <exception cref="T:System.ArgumentException">Incorrect data length.</exception>
+            
+        </member>
+        <member name="M:Accord.Extensions.Math.FourierTransform.FFT2(Accord.Extensions.Math.ComplexF[0:,0:],Accord.Extensions.Math.FourierTransform.Direction)">
+            <summary>
+            Two dimensional Fast Fourier Transform.
+            </summary>
+            <param name="data">Data to transform.</param>
+            <param name="direction">Transformation direction.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.FourierTransform.FFT2(Accord.Extensions.Math.ComplexF*,System.Int32,System.Int32,System.Int32,Accord.Extensions.Math.FourierTransform.Direction)">
+            <summary>
+            Two dimensional Fast Fourier Transform.
+            </summary>
+            <param name="width">Image width.</param> 
+            <param name="height">Image height.</param>
+            <param name="stride">Image stride.</param>
+            <param name="data">Data to transform.</param>
+            <param name="direction">Transformation direction.</param>
+            
+            <remarks><para><note>The method accepts <paramref name="data"/> array of 2<sup>n</sup> size
+            only in each dimension, where <b>n</b> may vary in the [1, 14] range. For example, 16x16 array
+            is valid, but 15x15 is not.</note></para></remarks>
+            
+            <exception cref="T:System.ArgumentException">Incorrect data length.</exception>
+            
+        </member>
+        <member name="T:Accord.Extensions.Math.MathExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides additional math functions.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathExtensions.CalculateOctant(System.Int32@,System.Int32@)">
+            <summary>
+            Calculates an octant and brings x and y to the first octant
+            </summary>
+            <returns> Octant [0..7]</returns>
+        </member>
+        <member name="F:Accord.Extensions.Math.MathExtensions.DEG_RESOULTION">
+            <summary>
+            Degree resolution.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathExtensions.Atan2Aprox(System.Int32,System.Int32)">
+            <summary>
+            Approximates Atan2 function. Maximum error is 90 / Y_MUL_CONST (1.4 degrees). 
+            </summary>
+            <param name="dY">Vertical offset.</param>
+            <param name="dX">Horizontal offset.</param>
+            <returns>Angle in degrees.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathExtensions.Sqrt(System.Single)">
+            <summary>
+            Approximates Sqrt function.
+            see: http://blog.wouldbetheologian.com/2011/11/fast-approximate-sqrt-method-in-c.html
+            </summary>
+            <param name="z">Input number</param>
+            <returns>Square root.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathExtensions.CalculateJacobian(System.Func{System.Double[],System.Double[]},System.Double[],System.Double)">
+            <summary>
+            Calculates Jacobian matrix.
+            The size of an Jacobian matrix is [func output length x arg length]
+            </summary>
+            <param name="evalFunc">
+            Evaluation function.
+            arg: starting point 
+            returns: function result.
+            </param>
+            <param name="arg">Starting point.</param>
+            <param name="eps">Delta between two points.</param>
+            <returns>Jacobian matrix.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.MathPowerofTwoExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides additional math functions for integer numbers to check whether they are power of two or not.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathPowerofTwoExtensions.IsPowerOfTwo(System.UInt64)">
+            <summary>
+            Checks whether the specified value is power of 2. 
+            It uses fast arithemtics to avoid using: Math.Floor(Math.Log(x, 2))
+            </summary>
+            <param name="x">Value to check.</param>
+            <returns>True if the number is power of 2, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathPowerofTwoExtensions.IsPowerOfTwo(System.UInt32)">
+            <summary>
+            Checks whether the specified value is power of 2. 
+            It uses fast arithemtics to avoid using: Math.Floor(Math.Log(x, 2))
+            </summary>
+            <param name="x">Value to check.</param>
+            <returns>True if the number is power of 2, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathPowerofTwoExtensions.IsPowerOfTwo(System.Int32)">
+            <summary>
+            Checks whether the specified value is power of 2. 
+            It uses fast arithmetics to avoid using: Math.Floor(Math.Log(x, 2)).
+            </summary>
+            <param name="x">Value to check.</param>
+            <returns>True if the number is power of 2, false otherwise.</returns>
+            <exception cref="T:System.ArgumentException">The specified value must be greater or equal to zero.</exception>
+        </member>
+        <member name="T:Accord.Extensions.Math.MathEnumerableExtensions">
+            <summary>
+            Provides additional math functions for collections.
+            <para>Defined functions can be used as object extensions.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathEnumerableExtensions.WeightedAverage(System.Collections.Generic.IEnumerable{System.Single},System.Collections.Generic.IList{System.Single})">
+            <summary>
+            Calculates weighted average. 
+            <para>In case where sum of weights is equal to zero, zero will be returned. Use a function overload to change this behavior.</para>
+            </summary>
+            <param name="collection">Collections of elements.</param>
+            <param name="weights">Weights.</param>
+            <returns>Weighted average of a collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathEnumerableExtensions.WeightedAverage(System.Collections.Generic.IEnumerable{System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates weighted average. 
+            <para>In case where sum of weights is equal to zero, zero will be returned. Use a function overload to change this behavior.</para>
+            </summary>
+            <param name="collection">Collections of elements.</param>
+            <param name="weights">Weights.</param>
+            <returns>Weighted average of a collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathEnumerableExtensions.WeightedAverage``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,System.Double},System.Func{``0,System.Int32,System.Double})">
+            <summary>
+            Calculates weighted average. 
+            <para>In case where sum of weights is equal to zero, zero will be returned. Use a function overload to change this behavior.</para>
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="collection">Collections of elements.</param>
+            <param name="valueSelector">Value selector. Parameters are the selected element and index of an element.</param>
+            <param name="weightSelector">Weight selector. Parameters are the selected element and index of an element.</param>
+            <returns>Weighted average of a collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Math.MathEnumerableExtensions.WeightedAverage``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,System.Double},System.Func{``0,System.Int32,System.Double},System.Func{System.Double})">
+            <summary>
+            Calculates weighted average.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="collection">Collections of elements.</param>
+            <param name="valueSelector">Value selector. Parameters are the selected element and index of an element.</param>
+            <param name="weightSelector">Weight selector. Parameters are the selected element and index of an element.</param>
+            <param name="divisionByZeroResolver">Division by zero case resolver.</param>
+            <returns>Weighted average of a collection.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Math.ComplexF">
+            <summary>
+            Represents complex number.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.ComplexF.Re">
+            <summary>
+            Real part of the complex number.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Math.ComplexF.Im">
+            <summary>
+            Imaginary part of the complex number.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Math.ComplexF.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates a new instance of <see cref="T:Accord.Extensions.Math.ComplexF"/> structure.
+            </summary>
+            <param name="re">Real part.</param>
+            <param name="im">Imaginary part.</param>
+        </member>
+        <member name="M:Accord.Extensions.Math.ComplexF.Magnitude">
+            <summary>
+            Calculates magnitude.
+            </summary>
+            <returns>Magnitude.</returns>
+        </member>
+        <member name="M:MoreLinq.MoreEnumerable.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Immediately executes the given action on each element in the source sequence.
+            </summary>
+            <typeparam name="T">The type of the elements in the sequence</typeparam>
+            <param name="source">The sequence of elements</param>
+            <param name="action">The action to execute on each element</param>
+        </member>
+        <member name="M:MoreLinq.MoreEnumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Returns the minimal element of the given sequence, based on
+            the given projection.
+            </summary>
+            <remarks>
+            If more than one element has the minimal projected value, the first
+            one encountered will be returned. This overload uses the default comparer
+            for the projected type. This operator uses immediate execution, but
+            only buffers a single result (the current minimal element).
+            </remarks>
+            <typeparam name="TSource">Type of the source sequence</typeparam>
+            <typeparam name="TKey">Type of the projected element</typeparam>
+            <param name="source">Source sequence</param>
+            <param name="selector">Selector to use to pick the results to compare</param>
+            <returns>The minimal element, according to the projection.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
+            <exception cref="T:System.InvalidOperationException"><paramref name="source"/> is empty</exception>
+        </member>
+        <member name="M:MoreLinq.MoreEnumerable.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            Returns the minimal element of the given sequence, based on
+            the given projection and the specified comparer for projected values.
+            </summary>
+            <remarks>
+            If more than one element has the minimal projected value, the first
+            one encountered will be returned. This overload uses the default comparer
+            for the projected type. This operator uses immediate execution, but
+            only buffers a single result (the current minimal element).
+            </remarks>
+            <typeparam name="TSource">Type of the source sequence</typeparam>
+            <typeparam name="TKey">Type of the projected element</typeparam>
+            <param name="source">Source sequence</param>
+            <param name="selector">Selector to use to pick the results to compare</param>
+            <param name="comparer">Comparer to use to compare projected values</param>
+            <returns>The minimal element, according to the projection.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/> 
+            or <paramref name="comparer"/> is null</exception>
+            <exception cref="T:System.InvalidOperationException"><paramref name="source"/> is empty</exception>
+        </member>
+    </members>
+</doc>

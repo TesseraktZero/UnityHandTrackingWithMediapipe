@@ -1,0 +1,789 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Accord.Extensions.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Accord.Extensions.Diagnostics">
+            <summary>
+            Contains methods for code performance measurement. 
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Diagnostics.MeasureTime(System.Action)">
+            <summary>
+            Executes a provided action and measures time in milliseconds that was consumed by provided action.
+            </summary>
+            <param name="action">User specified action.</param>
+            <returns>Elapsed time in milliseconds.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Diagnostics.MeasureAverageTime(System.Action{System.Int32},System.Int32)">
+            <summary>
+             Executes a provided action several times and measures average time in milliseconds that was consumed by provided action.
+            </summary>
+            <param name="action">User specified action. The parameter is current execution count [0..executionCount-1].</param>
+            <param name="executionCount">Number of times to execute the specified action.</param>
+            <returns>Average elapsed time in milliseconds.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Diagnostics.CombinedWriter">
+            <summary>
+            Combined console stream writer. Enables the cloning the console output.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Diagnostics.StartConsoleLogging(System.String,System.Boolean)">
+            <summary>
+            Starts to clone the console output to a specified file.
+            <para>If the logging is active the old instance is replaced by a new one.</para>
+            </summary>
+            <param name="fileName">Log-file name</param>
+            <param name="append">True to append to an existing file, false to overwrite it.</param>
+        </member>
+        <member name="M:Accord.Extensions.Diagnostics.StopConsoleLogging">
+            <summary>
+            Stops the logging process.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions">
+            <summary>
+            Contains methods that simulate binary tree using array.
+            <para>All methods are extension on <see cref="T:System.Collections.Generic.IList`1"/></para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.LeafIndices``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Gets leaf node indices.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <returns>Node indices.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.ParentIndex``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            Returns parent index determined by its child <paramref name="nodeIndex"/>.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <param name="nodeIndex">Left or right child index.</param>
+            <returns>Parent index.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.LeftChildIndex``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            Returns child index determined by its <paramref name="parentIndex"/>.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <param name="parentIndex">Parent index.</param>
+            <returns>Child index.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.RightChildIndex``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            Returns child index determined by its <paramref name="parentIndex"/>.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <param name="parentIndex">Parent index.</param>
+            <returns>Child index.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.GetLeftChild``1(System.Collections.Generic.IList{``0},System.Int32,``0@)">
+            <summary>
+            Gets the node determined by its <paramref name="parentIndex"/>.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <param name="parentIndex">Parent index.</param>
+            <param name="node">Child value.</param>
+            <returns>True if the child index is in collection bounds, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.GetRightChild``1(System.Collections.Generic.IList{``0},System.Int32,``0@)">
+            <summary>
+            Gets the node determined by its <paramref name="parentIndex"/>.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <param name="parentIndex">Parent index.</param>
+            <param name="node">Child value.</param>
+            <returns>True if the child index is in collection bounds, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.ReplaceLeftChild``1(System.Collections.Generic.IList{``0},System.Int32,``0)">
+            <summary>
+            Replaces child element given by the <paramref name="parentIndex"/>.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <param name="parentIndex">Parent index.</param>
+            <param name="child">New child value.</param>
+            <returns>True if the child index is in collection bounds - child can not be replaced, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.ReplaceRightChild``1(System.Collections.Generic.IList{``0},System.Int32,``0)">
+            <summary>
+            Replaces child element given by the <paramref name="parentIndex"/>.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <param name="parentIndex">Parent index.</param>
+            <param name="child">New child value.</param>
+            <returns>True if the child index is in collection bounds - child can not be replaced, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.BinaryTree.BinaryTreeArrayExtensions.GetBinaryTreeDepth``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Gets depth of the binary tree.
+            </summary>
+            <typeparam name="T">Data type.</typeparam>
+            <param name="collection">Data collection observed as binary tree.</param>
+            <returns>Depth of the binary tree.</returns>
+        </member>
+        <member name="T:Accord.Extensions.DictonaryMatExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides extension methods for <see cref="T:System.Collections.Generic.Dictionary`2"/> matrix.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.ContainsKey``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``0,``0)">
+            <summary>
+            Determines whether the dictionary matrix contains the specified key.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <param name="firstKey">First key - row selector.</param>
+            <param name="secondKey">Second key - column selector.</param>
+            <returns>True if the specified key exist in dictionary matrix, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.Get``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``0,``0)">
+            <summary>
+            Gets the value associated with the two keys set.
+            </summary>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"></exception>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <param name="firstKey">First key - row selector.</param>
+            <param name="secondKey">Second key - column selector.</param>
+            <returns>Value.</returns>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.TryGetValue``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``0,``0,``1@)">
+            <summary>
+            Gets the value determined by the <paramref name="firstKey"/> and <paramref name="secondKey"/>.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <param name="firstKey">First key - row selector.</param>
+            <param name="secondKey">Second key - colum selector.</param>
+            <param name="value">Value.</param>
+            <returns>True if provided keys exist, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.Add``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``0,``0,``1)">
+            <summary>
+            Adds data determined by the provided keys.
+            <para>In case the provided keys already exist, an exception is thrown.</para>
+            </summary>
+            <exception cref="T:System.ArgumentException">Key already exist.</exception>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <param name="firstKey">First key - row selector.</param>
+            <param name="secondKey">Second key - colum selector.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.AddOrUpdate``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``0,``0,``1)">
+            <summary>
+            Adds or update data determined by the provided keys.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <param name="firstKey">First key - row selector.</param>
+            <param name="secondKey">Second key - colum selector.</param>
+            <param name="value">Value.</param>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.Remove``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1},``0,``0)">
+            <summary>
+            Removes data determined by the provided keys.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <param name="firstKey">First key - row selector.</param>
+            <param name="secondKey">Second key - colum selector.</param>
+            <returns>True if the provided keys exist, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.ToSparseMatrix``2(System.Collections.Generic.IEnumerable{``1},System.Func{``1,``0},System.Func{``1,``0})">
+            <summary>
+            Creates new sparse matrix from provided collection.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="values"></param>
+            <param name="firstKeySelector">Row matrix selector.</param>
+            <param name="secondKeySelector">Column matrix selector.</param>
+            <returns>Sparse matrix - nested dictionaries.</returns>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.ToSparseMatrix``3(System.Collections.Generic.IEnumerable{``2},System.Func{``2,``0},System.Func{``2,``0},System.Func{``2,``1})">
+            <summary>
+            Creates new sparse matrix from provided collection.
+            </summary>
+            <typeparam name="TSrcValue">Source value type.</typeparam>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="values"></param>
+            <param name="firstKeySelector">Row matrix selector.</param>
+            <param name="secondKeySelector">Column matrix selector.</param>
+            <param name="valueSelector">Value selector.</param>
+            <returns>Sparse matrix - nested dictionaries.</returns>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.AsEnumerable``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1})">
+            <summary>
+            Returns the collection of sparse matrix values.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <returns>Collection of sparse matrix values.</returns>
+        </member>
+        <member name="M:Accord.Extensions.DictonaryMatExtensions.GetKeys``2(System.Collections.Generic.IDictionary{Accord.Extensions.Pair{``0},``1})">
+            <summary>
+            Returns the collection of sparse matrix row and column keys.
+            </summary>
+            <typeparam name="TKey">Key type.</typeparam>
+            <typeparam name="TValue">Value type.</typeparam>
+            <param name="mat">Sparse matrix - nested dictionaries.</param>
+            <returns>Collection of sparse matrix row and column keys.</returns>
+        </member>
+        <member name="T:Accord.Extensions.IndexOfMaxExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides methods for finding the index of the max element in a sequence.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.IndexOfMaxExtensions.IndexOfMax``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Finds the index of the max element in a sequence.
+            <para>Default comparer is used for a selected key.</para>
+            </summary>
+            <typeparam name="TSource">Collection type.</typeparam>
+            <param name="collection">Collection.</param>
+            <returns>
+            The index of the maximum element.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">in case when the collection is empty.</exception>
+        </member>
+        <member name="M:Accord.Extensions.IndexOfMaxExtensions.IndexOfMax``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">
+            <summary>
+            Finds the index of the max element in a sequence.
+            <para>Default comparer is used for a selected key.</para>
+            </summary>
+            <typeparam name="TSource">Collection type.</typeparam>
+            <typeparam name="TKey">Key type.</typeparam>
+            <param name="collection">Collection.</param>
+            <param name="selector">Key selector. Parameters are: the current element and an index of an element in the sequence.</param>
+            <returns>
+            The index of the maximum element.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">in case when the collection is empty.</exception>
+        </member>
+        <member name="M:Accord.Extensions.IndexOfMaxExtensions.IndexOfMax``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            Finds the index of the max element in a sequence.
+            </summary>
+            <typeparam name="TSource">Collection type.</typeparam>
+            <typeparam name="TKey">Key type.</typeparam>
+            <param name="collection">Collection.</param>
+            <param name="selector">Key selector. Parameters are: the current element and an index of an element in the sequence.</param>
+            <param name="comparer">Comparer for the selected key type.</param>
+            <returns>
+            The index of the maximum element.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">in case when the collection is empty.</exception>
+        </member>
+        <member name="T:Accord.Extensions.IndexOfMinExtensions">
+            <summary>
+            Contains extension methods for determining the index of the minimum element in collection.
+            <para>All methods can be used as extensions.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.IndexOfMinExtensions.IndexOfMin``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Finds the index of the min element in a sequence.
+            <para>Default comparer is used for a selected key.</para>
+            </summary>
+            <typeparam name="TSource">Collection type.</typeparam>
+            <param name="collection">Collection.</param>
+            <returns>
+            The index of the minimum element.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">in case when the collection is empty.</exception>
+        </member>
+        <member name="M:Accord.Extensions.IndexOfMinExtensions.IndexOfMin``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">
+            <summary>
+            Finds the index of the min element in a sequence.
+            <para>Default comparer is used for a selected key.</para>
+            </summary>
+            <typeparam name="TSource">Collection type.</typeparam>
+            <typeparam name="TKey">Key type.</typeparam>
+            <param name="collection">Collection.</param>
+            <param name="selector">Key selector. Parameters are: the current element and an index of an element in the sequence.</param>
+            <returns>
+            The index of the minimum element.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">in case when the collection is empty.</exception>
+        </member>
+        <member name="M:Accord.Extensions.IndexOfMinExtensions.IndexOfMin``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            Finds the index of the min element in a sequence.
+            </summary>
+            <typeparam name="TSource">Collection type.</typeparam>
+            <typeparam name="TKey">Key type.</typeparam>
+            <param name="collection">Collection.</param>
+            <param name="selector">Key selector. Parameters are: the current element and an index of an element in the sequence.</param>
+            <param name="comparer">Comparer for the selected key type.</param>
+            <returns>
+            The index of the minimum element.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">in case when the collection is empty.</exception>
+        </member>
+        <member name="T:Accord.Extensions.SelectExtensions">
+            <summary>
+            Contains extension methods for projecting a collection.
+            <para>All methods can be used as extensions.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.SelectExtensions.Select``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Action{System.Single})">
+            <summary>
+            Projects each element of a sequence into a new form by giving the progress expressed as percentage.
+            </summary>
+            <typeparam name="TSrc">Source type.</typeparam>
+            <typeparam name="TDest">Projected type.</typeparam>
+            <param name="collection">Collection.</param>
+            <param name="selector">Selector function.</param>
+            <param name="percentageAction">Executed prior every selection. Parameter represents percentage in range [0..1].</param>
+            <returns>Projected collection.</returns>
+        </member>
+        <member name="T:Accord.Extensions.EnumerableExtensions">
+            <summary>
+            <para>Some of defined functions can be used as object extensions.</para>
+            Provides extension methods for collections.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.GetRange(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets linear range of type Int32.
+            </summary>
+            <param name="start">Starting value.</param>
+            <param name="end">Maximum value.</param>
+            <param name="step">Step between values.</param>
+            <returns>Range of values.</returns>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.GetRange(System.Single,System.Single,System.Single)">
+            <summary>
+            Gets linear range of type Single.
+            </summary>
+            <param name="start">Starting value.</param>
+            <param name="end">Maximum value.</param>
+            <param name="step">Step between values.</param>
+            <returns>Range of values.</returns>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.GetAt``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Gets elements from source array at user defined indices.
+            </summary>
+            <param name="src">Data array.</param>
+            <param name="indicies">User defined indices.</param>
+            <returns>Array of values at specified indices.</returns>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.SetAt``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IList{``0})">
+            <summary>
+            Sets elements from source array at user defined indices.
+            </summary>
+            <param name="src">Data array.</param>
+            <param name="indicies">User defined indices.</param>
+            <param name="newValues">New values that replace old ones.</param>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.ApplyInPlace``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{System.Int32},System.Func{``0,``0})">
+            <summary>
+            Applies a user specified function to a given array at specified indices.
+            </summary>
+            <param name="src">Source collection.</param>
+            <param name="indicies">Selection indices.</param>
+            <param name="func">Function to apply at elements which are selected with indices.</param>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.GetRange``1(System.Collections.Generic.IList{``0},AForge.IntRange)">
+            <summary>
+            Gets elements from source array at user defined indices.
+            </summary>
+            <param name="src">Data array.</param>
+            <param name="range">User defined range.</param>
+            <returns>Array of values in specified range.</returns>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.GetRange``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
+            <summary>
+            Gets elements from source array at user defined indices.
+            </summary>
+            <param name="src">Data array.</param>
+            <param name="startIndex">Start index.</param>
+            <param name="length">Range length.</param>
+            <returns>Array of values in specified range.</returns>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.GetRange``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            Gets elements from source array at user defined indices.
+            </summary>
+            <param name="src">Data array.</param>
+            <param name="startIndex">Start index.</param>
+            <returns>Array of values in specified range.</returns>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.Remove``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Removes user-specified elements from the list.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="src">Data collection.</param>
+            <param name="elements">Elements to remove.</param>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.RemoveAt``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Removes user-specified element indices from the collection.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="src">Data collection.</param>
+            <param name="elementIndices">Indices of the elements to remove.</param>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.Create``1(System.Int32,System.Func{System.Int32,``0})">
+            <summary>
+            Creates a collection using provided function.
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="numberOfElements">Number of elements to create.</param>
+            <param name="creator">Element creator. Receives current element index as parameter.</param>
+            <returns>Array of created elements.</returns>
+        </member>
+        <member name="M:Accord.Extensions.EnumerableExtensions.EnumerateWith``3(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``1,``2})">
+            <summary>
+            Enumerates both collections simultaneously and executes user-specified function.
+            <para>Both collection will be iterated until end is reached for one of them.</para>
+            </summary>
+            <typeparam name="TFirst">First collection data type.</typeparam>
+            <typeparam name="TSecond">Second collection data type.</typeparam>
+            <typeparam name="TOutput">Output element type.</typeparam>
+            <param name="first">First collection.</param>
+            <param name="second">Second collection.</param>
+            <param name="function">User specified function.</param>
+            <returns>The result collection which elements are generated by using user-specified function.</returns>
+        </member>
+        <member name="T:Accord.Extensions.PathExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides methods for string which is treated as file and directory path.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.PathExtensions.EnumerateFiles(System.IO.DirectoryInfo,System.String[],System.IO.SearchOption)">
+             <summary>
+             Returns an enumerable collection of file information that matches a specified search pattern and search subdirectory option.
+             </summary>
+             <param name="dirInfo">Directory info.</param>
+             <param name="searchPatterns">The search strings (e.g. new string[]{ ".jpg", ".bmp" }</param>
+             <param name="searchOption">
+             One of the enumeration values that specifies whether the search operation
+             should include only the current directory or all subdirectories. The default
+             value is <see cref="F:System.IO.SearchOption.TopDirectoryOnly"/>.
+            </param>
+             <returns>An enumerable collection of files that matches <paramref name="searchPatterns"/> and <paramref name="searchOption"/>.</returns>
+        </member>
+        <member name="M:Accord.Extensions.PathExtensions.IsSubfolder(System.String,System.String)">
+            <summary>
+            Gets whether the path is child path.
+            </summary>
+            <param name="childPath">The child path.</param>
+            <param name="parentPath">The parent path.</param>
+            <returns>True if the child path is indeed child path (or the same) as parent path, otherwise false.</returns>
+        </member>
+        <member name="M:Accord.Extensions.PathExtensions.GetRelativeFilePath(System.String,System.IO.DirectoryInfo)">
+            <summary>
+            Gets relative file path regarding specified directory.
+            </summary>
+            <param name="fileName">Full file name and path.</param>
+            <param name="dirInfo">
+            Directory info of a directory path which serves as root.
+            </param>
+            <returns>Relative file path. In case the relative path could not be find the empty string is returned.</returns>
+        </member>
+        <member name="M:Accord.Extensions.PathExtensions.NormalizePathDelimiters(System.String)">
+            <summary>
+            Replaces path delimiters with platform-specific one defined in <see cref="F:System.IO.Path.DirectorySeparatorChar"/>.
+            </summary>
+            <param name="path">Path to replace delimiters.</param>
+            <returns>Path with replaced delimiters.</returns>
+        </member>
+        <member name="M:Accord.Extensions.PathExtensions.NormalizePathDelimiters(System.String,System.String)">
+            <summary>
+            Replaces path delimiters with specified one.
+            </summary>
+            <param name="path">Path to replace delimiters.</param>
+            <param name="normalizedDelimiter">Replacing delimiter.</param>
+            <returns>Path with replaced delimiters.</returns>
+        </member>
+        <member name="M:Accord.Extensions.PathExtensions.IsDirectory(System.String)">
+            <summary>
+            Checks whether the path is file or directory.
+            </summary>
+            <param name="path">File or directory path.</param>
+            <returns>
+            True if the path is directory, false if the path is file. 
+            Null is returned if the path does not exist or in case of an internal error.
+            </returns>
+        </member>
+        <member name="T:Accord.Extensions.RandomExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides extension methods for <see cref="T:System.Random"/>.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.RandomExtensions.NextDouble(System.Random,System.Double,System.Double)">
+            <summary>
+            Returns the random number in user-specified interval.
+            </summary>
+            <param name="random">Random generator.</param>
+            <param name="minimum">Minimum number.</param>
+            <param name="maximum">Maximum number.</param>
+            <returns>Random number in user-specified interval.</returns>
+        </member>
+        <member name="T:Accord.Extensions.ParallelExtensions">
+            <summary>
+            Provides extensions for working with collections in parallel way.
+            <para>Taken from <a href="http://blogs.msdn.com/b/pfxteam/archive/2009/08/12/9867246.aspx">parallel while</a> and modified.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.ParallelExtensions.While(System.Func{System.Boolean},System.Action{System.Threading.Tasks.ParallelLoopState})">
+            <summary>
+            Executes a while loop in parallel.
+            </summary>
+            <param name="condition">Condition function. Returns true if the loop should advance, false otherwise.</param>
+            <param name="body">Body function.</param>
+        </member>
+        <member name="M:Accord.Extensions.ParallelExtensions.While(System.Threading.Tasks.ParallelOptions,System.Func{System.Boolean},System.Action{System.Threading.Tasks.ParallelLoopState})">
+            <summary>
+            Executes a while loop in parallel.
+            </summary>
+            <param name="parallelOptions">Parallel options.</param>
+            <param name="condition">Condition function. Returns true if the loop should advance, false otherwise.</param>
+            <param name="body">Body function.</param>
+        </member>
+        <member name="T:Accord.Extensions.InfinitePartitioner">
+            <summary>
+            Represents an infinite data partitioner. Returns an infinite collection of type <see cref="T:System.Boolean"/>.
+            <para>It is used in While function extension.</para>
+            <para>Taken from <a href="http://blogs.msdn.com/b/pfxteam/archive/2009/08/12/9867246.aspx">parallel while</a>.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.InfinitePartitioner.GetPartitions(System.Int32)">
+            <summary>
+            Gets the partitions.
+            </summary>
+            <param name="partitionCount">The partition count.</param>
+            <returns>partitions.</returns>
+        </member>
+        <member name="P:Accord.Extensions.InfinitePartitioner.SupportsDynamicPartitions">
+            <summary>
+            This partitioner supports dynamic partitions (returns true).
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.InfinitePartitioner.GetDynamicPartitions">
+            <summary>
+            Creates and returns ininite enumerators of type <see cref="T:System.Boolean"/>.
+            </summary>
+            <returns>Ininite enumerators of type <see cref="T:System.Boolean"/></returns>
+        </member>
+        <member name="M:Accord.Extensions.InfinitePartitioner.InfiniteEnumerator">
+            <summary>
+            Gets the ininite enumerator.
+            </summary>
+            <returns>The ininite enumerator.</returns>
+        </member>
+        <member name="T:Accord.Extensions.SerializationExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides serialization extensions. 
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.SerializationExtensions.ToXElement``1(``0,System.Boolean)">
+            <summary>
+            Serializes specified object to <see cref="T:System.Xml.Linq.XElement"/>.
+            </summary>
+            <typeparam name="T">An object generic type.</typeparam>
+            <param name="obj">An input object.</param>
+            <param name="writeEmptyNamespace">Writes empty name-space attribute instead of standard w3.org name-space.</param>
+            <returns>Serialized object.</returns>
+        </member>
+        <member name="M:Accord.Extensions.SerializationExtensions.FromXElement``1(System.Xml.Linq.XElement)">
+            <summary>
+            De-serializes the specified <see cref="T:System.Xml.Linq.XElement"/> to an object.
+            </summary>
+            <typeparam name="T">Destination generic object type.</typeparam>
+            <param name="xElement">An element to deserialize.</param>
+            <returns>De-serialized object.</returns>
+        </member>
+        <member name="M:Accord.Extensions.SerializationExtensions.ToBinary``1(``0)">
+            <summary>
+            Serializes specified object to memory stream by using binary formatter.
+            </summary>
+            <typeparam name="T">Object type.</typeparam>
+            <param name="obj">Object to serialize.</param>
+            <returns>Memory stream containing serialized object.</returns>
+        </member>
+        <member name="M:Accord.Extensions.SerializationExtensions.ToBinary``1(``0,System.String)">
+            <summary>
+            Serializes specified object to memory stream by using binary formatter.
+            <para>If the file exists it will be overwritten.</para>
+            </summary>
+            <typeparam name="T">Object type.</typeparam>
+            <param name="obj">Object to serialize.</param>
+            <param name="fileName">The name of the file to save serialized object.</param>
+        </member>
+        <member name="M:Accord.Extensions.SerializationExtensions.ToBinary``1(``0,System.IO.Stream)">
+            <summary>
+            Serializes specified object to memory stream by using binary formatter.
+            </summary>
+            <typeparam name="T">Object type.</typeparam>
+            <param name="obj">Object to serialize.</param>
+            <param name="stream">The existing stream to serialize to.</param>
+        </member>
+        <member name="M:Accord.Extensions.SerializationExtensions.FromBinary``1(System.IO.Stream)">
+            <summary>
+            De-serializes the object from the specified stream.
+            <para>When de-serializing multiple objects the position within stream must not be tampered by the user.</para>
+            </summary>
+            <typeparam name="T">Object type.</typeparam>
+            <param name="stream">The stream which contains object data.</param>
+            <returns>De-serialized object.</returns>
+        </member>
+        <member name="T:Accord.Extensions.ParallelRandom`1">
+            <summary>
+            Parallel random class.
+            </summary>
+            <typeparam name="TRandom">Random type.</typeparam>
+        </member>
+        <member name="M:Accord.Extensions.ParallelRandom`1.Initialize(System.Func{System.Int32,`0})">
+            <summary>
+            Initializes a new parallel random generator.
+            </summary>
+            <param name="localRandCreator">Local random creation function.</param>
+        </member>
+        <member name="P:Accord.Extensions.ParallelRandom`1.Local">
+            <summary>
+            Gets the random generator of the current thread.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.ParallelRandom">
+            <summary>
+            Parallel random class of an System.Random
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.ParallelRandom.#cctor">
+            <summary>
+            Initializes parallel random generator.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.ParallelRandom.Next">
+            <summary>
+            Gets the next random number. 
+            This function encapsulates the rand.Next() function where rand is an instance of System.Random class.
+            <para>Oppose to rand.Next() this function is thread safe.</para>
+            </summary>
+            <returns>New random non-negative number.</returns>
+        </member>
+        <member name="M:Accord.Extensions.ParallelRandom.Next(System.Int32,System.Int32)">
+            <summary>
+            Returns a random number within a specified range.
+            </summary>
+            <param name="minValue">The inclusive lower bound of the random number returned.</param>
+            <param name="maxValue">
+            The exclusive upper bound of the random number returned. maxValue must be
+            greater than or equal to minValue.
+            </param>
+            <returns>A 32-bit signed integer greater than or equal to minValue and less than maxValue.</returns>
+        </member>
+        <member name="M:Accord.Extensions.ParallelRandom.NextBytes(System.Byte[])">
+            <summary>
+            Fills the provided array of bytes with random values.
+            </summary>
+            <param name="buffer">Buffer to fill with random numbers.</param>
+        </member>
+        <member name="T:Accord.Extensions.SearchMethods">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides methods for graph search. 
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.SearchMethods.BreadthFirstSearch``1(System.Collections.Generic.List{``0},``0,``0,System.Func{``0,``0,System.Boolean})">
+            <summary>
+            Breadth first search.
+            </summary>
+            <param name="data">Initial set to search</param>
+            <param name="src">Start element.</param>
+            <param name="dest">End element.</param>
+            <param name="areAdjacent">Function that returns true if two elements are adjacent.</param>
+            <returns>All possible paths from source to destination node.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Pair`1">
+            <summary>
+            Represents pair of <typeparamref name="T"/> type.
+            </summary>
+            <typeparam name="T">Generic type.</typeparam>
+        </member>
+        <member name="F:Accord.Extensions.Pair`1.First">
+            <summary>
+            Gets or sets the first element.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Pair`1.Second">
+            <summary>
+            Gets or sets the second element.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Pair`1.#ctor">
+            <summary>
+            Constructs the empty pair. 
+            Properties are initialized to the default type values.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Pair`1.#ctor(`0,`0)">
+            <summary>
+            Constructs the pair structure.
+            </summary>
+            <param name="first">First value.</param>
+            <param name="second">Second value.</param>
+        </member>
+        <member name="M:Accord.Extensions.Pair`1.Equals(System.Object)">
+            <summary>
+            Determines whether the current object is equal to the specified one.
+            </summary>
+            <param name="obj">Other object to compare with.</param>
+            <returns>True if the current object is equal to the specified one, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Pair`1.GetHashCode">
+            <summary>
+            Gets the object's hash code.
+            </summary>
+            <returns>Object's has code.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Pair`1.ToString">
+            <summary>
+            Gets the string representation of the object.
+            </summary>
+            <returns>String representation of the object.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Pair`1.op_Implicit(Accord.Extensions.Pair{`0})~System.Tuple{`0,`0}">
+            <summary>
+            Converts the structure into System.Tuple{T, T}.
+            </summary>
+            <param name="pair">Value pair.</param>
+            <returns>Tuple.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Pair`1.op_Implicit(System.Tuple{`0,`0})~Accord.Extensions.Pair{`0}">
+            <summary>
+            Converts the structure into Accord.Extensions.Pair{T}.
+            </summary>
+            <param name="tuple">Tuple.</param>
+            <returns>Pair.</returns>
+        </member>
+    </members>
+</doc>

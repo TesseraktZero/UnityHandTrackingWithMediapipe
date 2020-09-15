@@ -1,0 +1,1902 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotImaging.Primitives2D</name>
+    </assembly>
+    <members>
+        <member name="T:DotImaging.Primitives2D.Box2D">
+            <summary>
+            Box2D equivalent of OpenCV's Box2D Class.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Box2D.Empty">
+            <summary>
+            Gets empty structure.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Box2D.Center">
+            <summary>
+            Area center.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Box2D.Size">
+            <summary>
+            Area size.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Box2D.Angle">
+            <summary>
+            Angle in degrees.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.#ctor(DotImaging.Primitives2D.RectangleF,System.Single)">
+            <summary>
+            Creates new structure from area and angle.
+            </summary>
+            <param name="rect">Area.</param>
+            <param name="angle">Angle in degrees.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.#ctor(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF,System.Single)">
+            <summary>
+            Creates new structure from area and angle.
+            </summary>
+            <param name="center">Box2D center.</param>
+            <param name="size">Box 2D size.</param>
+            <param name="angle">Angle in degrees.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Box2D.IsEmpty">
+            <summary>
+            Returns true if the structure is  empty.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.GetMinArea">
+            <summary>
+            Gets the minimum enclosing rectangle for this box.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.GetVertices">
+            <summary>
+            Gets vertices.
+            </summary>
+            <returns>Vertices.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.op_Implicit(DotImaging.Primitives2D.Rectangle)~DotImaging.Primitives2D.Box2D">
+            <summary>
+            Converts Rectangle to the Box2D representation (angle is zero).
+            </summary>
+            <param name="rect">Rectangle to convert.</param>
+            <returns>Box2D representation.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.op_Implicit(DotImaging.Primitives2D.RectangleF)~DotImaging.Primitives2D.Box2D">
+            <summary>
+            Converts RectangleF to the Box2D representation (angle is zero).
+            </summary>
+            <param name="rect">Rectangle to convert.</param>
+            <returns>Box2D representation.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.Equals(System.Object)">
+            <summary>
+            Determines whether two objects are equal.
+            </summary>
+            <param name="obj">Object to test.</param>
+            <returns>True if two objects are equal, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Box2D.GetHashCode">
+            <summary>
+            Gets hash-code for the structure.
+            </summary>
+            <returns>Hash-code.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Circle">
+            <summary>
+              2D circle class.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Circle.X">
+            <summary>
+            Horizontal center coordinate.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Circle.Y">
+            <summary>
+            Vertical center coordinate.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Circle.Radius">
+            <summary>
+            Circle radius.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Circle.Center">
+            <summary>
+            Gets or sets circle's location.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Circle.#ctor(DotImaging.Primitives2D.Point,System.Int32)">
+            <summary>
+            Creates a new instance of an <see cref="T:DotImaging.Primitives2D.CircleF"/> structure.
+            </summary>
+            <param name="position">Center position.</param>
+            <param name="radius">Circle radius.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Circle.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new instance of an <see cref="T:DotImaging.Primitives2D.Circle"/> structure.
+            </summary>
+            <param name="x">Horizontal center position.</param>
+            <param name="y">Vertical center position.</param>
+            <param name="radius">Circle radius.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Circle.Area">
+            <summary>
+              Gets the area of the circle (πR²).
+            </summary>
+            
+        </member>
+        <member name="P:DotImaging.Primitives2D.Circle.Circumference">
+            <summary>
+              Gets the circumference of the circle (2πR).
+            </summary>
+            
+        </member>
+        <member name="P:DotImaging.Primitives2D.Circle.Diameter">
+            <summary>
+              Gets the diameter of the circle (2R).
+            </summary>
+            
+        </member>
+        <member name="M:DotImaging.Primitives2D.Circle.DistanceToPoint(DotImaging.Primitives2D.Point)">
+            <summary>
+              Computes the distance from circle to point.
+            </summary>
+            
+            <param name="point">The point to have its distance from the circle computed.</param>
+            
+            <returns>The distance from <paramref name="point"/> to this circle.</returns>
+            
+        </member>
+        <member name="M:DotImaging.Primitives2D.Circle.op_Implicit(DotImaging.Primitives2D.Circle)~DotImaging.Primitives2D.CircleF">
+            <summary>
+            Converts integer into floating-point representation.
+            </summary>
+            <param name="circle">Integer circle representation.</param>
+            <returns>Floating-point circle representation.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.CircleF">
+            <summary>
+              2D circle class.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.CircleF.X">
+            <summary>
+            Horizontal center coordinate.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.CircleF.Y">
+            <summary>
+            Vertical center coordinate.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.CircleF.Radius">
+            <summary>
+            Circle radius.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.CircleF.Center">
+            <summary>
+            Gets or sets circle's location.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.CircleF.#ctor(DotImaging.Primitives2D.PointF,System.Single)">
+            <summary>
+            Creates a new instance of an <see cref="T:DotImaging.Primitives2D.CircleF"/> structure.
+            </summary>
+            <param name="position">Center position.</param>
+            <param name="radius">Circle radius.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.CircleF.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a new instance of an <see cref="T:DotImaging.Primitives2D.CircleF"/> structure.
+            </summary>
+            <param name="x">Horizontal center position.</param>
+            <param name="y">Vertical center position.</param>
+            <param name="radius">Circle radius.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.CircleF.Area">
+            <summary>
+              Gets the area of the circle (πR²).
+            </summary>
+            
+        </member>
+        <member name="P:DotImaging.Primitives2D.CircleF.Circumference">
+            <summary>
+              Gets the circumference of the circle (2πR).
+            </summary>
+            
+        </member>
+        <member name="P:DotImaging.Primitives2D.CircleF.Diameter">
+            <summary>
+              Gets the diameter of the circle (2R).
+            </summary>
+            
+        </member>
+        <member name="M:DotImaging.Primitives2D.CircleF.#ctor(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+              Creates a new <see cref="T:DotImaging.Primitives2D.Circle"/> from three non-linear points.
+            </summary>
+            
+            <param name="p1">The first point.</param>
+            <param name="p2">The second point.</param>
+            <param name="p3">The third point.</param>
+            
+        </member>
+        <member name="M:DotImaging.Primitives2D.CircleF.DistanceToPoint(DotImaging.Primitives2D.PointF)">
+            <summary>
+              Computes the distance from circle to point.
+            </summary>
+            
+            <param name="point">The point to have its distance from the circle computed.</param>
+            
+            <returns>The distance from <paramref name="point"/> to this circle.</returns>
+            
+        </member>
+        <member name="T:DotImaging.Primitives2D.Ellipse">
+            <summary>
+            Ellipse structure containing center and ellipse size.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Ellipse.#ctor(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF,System.Single)">
+            <summary>
+            Creates a new ellipse.
+            </summary>
+            <param name="center">Ellipse center.</param>
+            <param name="size">Ellipse size.</param>
+            <param name="angle">Angle in degrees.</param>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Ellipse.Center">
+            <summary>
+            Area center.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Ellipse.Size">
+            <summary>
+            Area size.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Ellipse.Angle">
+            <summary>
+            Angle in degrees.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Ellipse.op_Explicit(DotImaging.Primitives2D.Box2D)~DotImaging.Primitives2D.Ellipse">
+            <summary>
+            Converts Box2D to Ellipse representation.
+            </summary>
+            <param name="box">Box to convert.</param>
+            <returns>Ellipse.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Ellipse.op_Explicit(DotImaging.Primitives2D.Ellipse)~DotImaging.Primitives2D.Box2D">
+            <summary>
+            Converts Ellipse to Box2D representation.
+            </summary>
+            <param name="ellipse">Ellipse to convert.</param>
+            <returns>Box2D.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Ellipse.Fit(System.Double[0:,0:],DotImaging.Primitives2D.PointF)">
+            <summary>
+            Fits the covariance matrix (or 2nd moment matrix) to the ellipse by calculating eigen-vectors and values.
+            </summary>
+            <param name="covMatrix">Covariance matrix (or 2nd moment matrix).</param>
+            <param name="center">Center of the ellipse.</param>
+            <returns>Ellipse.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Ellipse.Fit(System.Double,System.Double,System.Double,DotImaging.Primitives2D.PointF,System.Boolean@)">
+            <summary>
+            Fits the covariance matrix (or 2nd moment matrix) to the ellipse by calculating eigen-vectors and values.
+            </summary>
+            <param name="a">[0, 0] value of the covariance matrix.</param>
+            <param name="b">[0, 1] or [1, 0] value of the covariance matrix.</param>
+            <param name="c">[1, 1] value of the covariance matrix.</param>
+            <param name="center">Center of the ellipse.</param>
+            <param name="success">Returns true if both calculated eigen-values are positive.</param>
+            <returns>Ellipse.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Ellipse.Fit(System.Double,System.Double,System.Double,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Fits the covariance matrix (or 2nd moment matrix) to the ellipse by calculating eigen-vectors and values.
+            </summary>
+            <param name="a">[0, 0] value of the covariance matrix.</param>
+            <param name="b">[0, 1] or [1, 0] value of the covariance matrix.</param>
+            <param name="c">[1, 1] value of the covariance matrix.</param>
+            <param name="center">Center of the ellipse.</param>
+            <returns>Ellipse.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Point`1">
+            <summary>
+            Represents the 2D (X, Y) pair.
+            </summary>
+            <typeparam name="T">Value type.</typeparam>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point`1.#ctor(`0,`0)">
+            <summary>
+            Creates a new point.
+            </summary>
+            <param name="x">X coordinate.</param>
+            <param name="y">Y coordinate.</param>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Point`1.X">
+            <summary>
+            Gets or sets X coordinate.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Point`1.Y">
+            <summary>
+            Gets or sets Y coordinate.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point`1.Equals(System.Object)">
+            <summary>
+            Determines whether the provided object is equal to the current object.
+            </summary>
+            <param name="obj">Other object to compare with.</param>
+            <returns>True if the two objects are equal, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point`1.GetHashCode">
+            <summary>
+            Gets the hash code.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point`1.ToString">
+            <summary>
+            Gets the string representation of the object.
+            </summary>
+            <returns>String representation.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Point32iExtensions">
+            <summary>
+            Provides point extension methods.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iExtensions.Clamp(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Size)">
+            <summary>
+            Clamps point coordinate according to the specified size (0,0, size.Width, size.Height).
+            </summary>
+            <param name="point">The point to clamp.</param>
+            <param name="size">The valid region.</param>
+            <returns>Clamped point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iExtensions.Clamp(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Clamps point coordinate according to the specified size (rect.X, rect.Y, rect.Right, rect.Bottom).
+            </summary>
+            <param name="point">The point to clamp.</param>
+            <param name="rect">The valid region.</param>
+            <returns>Clamped point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iExtensions.Negate(DotImaging.Primitives2D.Point)">
+            <summary>
+            Negates point coordinates.
+            </summary>
+            <param name="point">The point to negate.</param>
+            <returns>Point with negated coordinates.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iExtensions.DistanceTo(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Point)">
+            <summary>
+            Calculates the Euclidean distance between two points.
+            </summary>
+            <param name="pointA">First point.</param>
+            <param name="pointB">Second point.</param>
+            <returns>Euclidean distance between the points.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Point32fExtensions">
+            <summary>
+            Provides point extension methods.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.UpScale(DotImaging.Primitives2D.PointF,System.Int32,System.Double)">
+            <summary>
+            Transforms point to the lower pyramid level.
+            </summary>
+            <param name="p">Point.</param>
+            <param name="levels">Specifies how many levels to take.</param>
+            <param name="factor">Specifies the pyramid scale factor.</param>
+            <returns>Scaled point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.DownScale(DotImaging.Primitives2D.PointF,System.Int32,System.Double)">
+            <summary>
+            Transforms point to the higher pyramid level.
+            </summary>
+            <param name="p">Point.</param>
+            <param name="levels">Specifies how many levels to take.</param>
+            <param name="factor">Specifies the pyramid scale factor.</param>
+            <returns>Scaled point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Floor(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Gets integer point representation by applying floor operation.
+            </summary>
+            <param name="p">Point to truncate.</param>
+            <returns>Truncated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Clamp(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Clamps point coordinate according to the specified size (0,0, size.Width, size.Height).
+            </summary>
+            <param name="point">The point to clamp.</param>
+            <param name="size">The valid region.</param>
+            <returns>Clamped point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Clamp(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Clamps point coordinate according to the specified size (rect.X, rect.Y, rect.Right, rect.Bottom).
+            </summary>
+            <param name="point">The point to clamp.</param>
+            <param name="rect">The valid region.</param>
+            <returns>Clamped point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Negate(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Negates point coordinates.
+            </summary>
+            <param name="point">The point to negate.</param>
+            <returns>Point with negated coordinates.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Offset(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Translates the point by the specified offset.
+            </summary>
+            <param name="point">The point to offset.</param>
+            <param name="offset">Offset to be added.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Subtract(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Subtracts the point by the specified offset.
+            </summary>
+            <param name="point">The point to subtract.</param>
+            <param name="offset">Subtract factor.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.DistanceTo(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Calculates the Euclidean distance between two points.
+            </summary>
+            <param name="pointA">First point.</param>
+            <param name="pointB">Second point.</param>
+            <returns>Euclidean distance between the points.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Rotate(DotImaging.Primitives2D.PointF,System.Double,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Rotates one point around another
+            </summary>
+            <param name="pointToRotate">The point to rotate.</param>
+            <param name="angleDeg">The rotation angle in degrees.</param>
+            <param name="centerPoint">The center point of rotation.</param>
+            <returns>Rotated point</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Rotate(DotImaging.Primitives2D.PointF,System.Double)">
+            <summary>
+            Rotates one point around another
+            </summary>
+            <param name="pointToRotate">The point to rotate.</param>
+            <param name="angleDeg">The rotation angle in degrees.</param>
+            <returns>Rotated point</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fExtensions.Round(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Rounds point coordinates.
+            </summary>
+            <param name="point">Point.</param>
+            <returns>Integer point with rounded coordinates.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Point32fCollectionExtensions">
+            <summary>
+            Provides point collection extensions.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fCollectionExtensions.IsInPolygon(System.Collections.Generic.IList{DotImaging.Primitives2D.PointF},System.Single,System.Single)">
+            <summary>
+            Checks whether the specified location is in the polygon.
+            </summary>
+            <param name="poly">Polygon.</param>
+            <param name="x">Horizontal coordinate.</param>
+            <param name="y">VErtical coordinate.</param>
+            <returns>True if the point resides inside the polygon, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fCollectionExtensions.BoundingRect(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Gets the minimum bounding rectangle around the points.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>Bounding rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fCollectionExtensions.Center(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Gets the center of the mass of the contour.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>The center of the mass of the contour.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fCollectionExtensions.IsRectangle(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF})">
+            <summary>
+            Determines whether the polygon forms rectangle.
+            </summary>
+            <param name="points">Polygon.</param>
+            <returns>True if the polygon forms rectangle, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32fCollectionExtensions.EnforceMinimalDistance(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.PointF},System.Single)">
+            <summary>
+            Selects points which satisfy minimal specified distance.
+            </summary>
+            <param name="candidates">Points sorted by importance. Points are tested by sequentially.</param>
+            <param name="minimalDistance">Minimal enforced distance.</param>
+            <returns>Filtered points which are spread by minimal <paramref name="minimalDistance"/>.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Point32iCollectionExtensions">
+            <summary>
+            Provides point collection extensions.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iCollectionExtensions.IsInPolygon(System.Collections.Generic.IList{DotImaging.Primitives2D.Point},System.Single,System.Single)">
+            <summary>
+            Checks whether the specified location is in the polygon.
+            </summary>
+            <param name="poly">Polygon.</param>
+            <param name="x">Horizontal coordinate.</param>
+            <param name="y">VErtical coordinate.</param>
+            <returns>True if the point resides inside the polygon, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iCollectionExtensions.BoundingRect(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point})">
+            <summary>
+            Gets the minimum bounding rectangle around the points.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>Bounding rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iCollectionExtensions.Center(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point})">
+            <summary>
+            Gets the center of the mass of the contour.
+            </summary>
+            <param name="points">Contour points.</param>
+            <returns>The center of the mass of the contour.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iCollectionExtensions.IsRectangle(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point})">
+            <summary>
+            Determines whether the polygon forms rectangle.
+            </summary>
+            <param name="points">Polygon.</param>
+            <returns>True if the polygon forms rectangle, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point32iCollectionExtensions.EnforceMinimalDistance(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Point},System.Single)">
+            <summary>
+            Selects points which satisfy minimal specified distance.
+            </summary>
+            <param name="candidates">Points sorted by importance. Points are tested by sequentially.</param>
+            <param name="minimalDistance">Minimal enforced distance.</param>
+            <returns>Filtered points which are spread by minimal <paramref name="minimalDistance"/>.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.RectangleExtennsions">
+            <summary>
+            Provides extension methods for Rectangle and RectangleF structures.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.IntersectionPercent(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Gets intersection percent of two rectangles.
+            </summary>
+            <param name="rect1">First rectangle.</param>
+            <param name="rect2">Second rectangle.</param>
+            <returns>Intersection percent (e.g. 1 - full intersection, 0 - no intersection).</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.Inflate(DotImaging.Primitives2D.Rectangle,System.Int32,System.Int32,DotImaging.Primitives2D.Size)">
+            <summary>
+            Inflates the rectangle by specified width and height (can be negative) and automatically clamps rectangle coordinates.
+            </summary>
+            <param name="rect">Rectangle to inflate.</param>
+            <param name="width">Horizontal amount.</param>
+            <param name="height">Vertical amount.</param>
+            <param name="constrainedArea">If specified rectangle region will be clamped.</param>
+            <returns>Inflated rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.Inflate(DotImaging.Primitives2D.Rectangle,System.Double,System.Double,DotImaging.Primitives2D.Size)">
+            <summary>
+            Inflates the rectangle by specified width and height (can be negative) and automatically clamps rectangle coordinates.
+            </summary>
+            <param name="rect">Rectangle to inflate.</param>
+            <param name="widthScale">Horizontal scale.</param>
+            <param name="heightScale">Vertical scale.</param>
+            <param name="constrainedArea">If specified rectangle region will be clamped.</param>
+            <returns>Inflated rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.Area(DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Gets the rectangle area.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>Area of the rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.Center(DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Gets rectangle center.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>Center of the rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.Vertices(DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Gets rectangle vertexes in clock-wise order staring from left-upper corner.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>Vertexes.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.IsEmptyArea(DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Gets whether the rectangle has an empty area. It is different than <see cref="F:DotImaging.Primitives2D.Rectangle.Empty"/> property.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>True if the rectangle has an empty area.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.Intersect(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Rectangle,System.Boolean)">
+            <summary>
+            Intersects the rectangle with other rectangle and returns intersected rectangle.
+            </summary>
+            <param name="rect">The input rectangle.</param>
+            <param name="other">The rectangle to intersect with.</param>
+            <param name="preserveScale">
+            If true the size components will be cropped by equal amount.
+            If false the size ratio will not be checked.
+            </param>
+            <returns>Intersected rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.Intersect(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Size,System.Boolean)">
+            <summary>
+            Calculates intersected rectangle from specified area (transformed into rectangle with location (0,0)) 
+            which can be useful for image area intersections.
+            </summary>
+            <param name="rect">Rectangle to intersect.</param>
+            <param name="area">Maximum bounding box represented as size.</param>
+            <param name="preserveScale">
+            If true the size components will be cropped by equal amount.
+            If false the size ratio will not be checked.
+            </param>
+            <returns>Intersected rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.MoveToFit(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Size,DotImaging.Primitives2D.Rectangle@)">
+            <summary>
+            Changes rectangle's location in order to fit the specified area.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="area">Valid bounding box.</param>
+            <param name="translatedRectangle">Translated rectangle.</param>
+            <returns>True if the translation exist, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleExtennsions.BoundingRectangle(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Rectangle})">
+            <summary>
+            Gets the bounding rectangle of the rectangle collection.
+            </summary>
+            <param name="rectangles">Rectangle collection.</param>
+            <returns>Bounding rectangle.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.RectangleFExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides extension methods for rectangle structure.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.MoveToFit(DotImaging.Primitives2D.RectangleF,DotImaging.Primitives2D.SizeF,DotImaging.Primitives2D.RectangleF@)">
+            <summary>
+            Changes rectangle's location in order to fit the specified area.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="area">Valid bounding box.</param>
+            <param name="translatedRectangle">Translated rectangle.</param>
+            <returns>True if the translation exist, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.IntersectionPercent(DotImaging.Primitives2D.RectangleF,DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Gets intersection percent of two rectangles.
+            </summary>
+            <param name="rect1">First rectangle.</param>
+            <param name="rect2">Second rectangle.</param>
+            <returns>Intersection percent (1 - full intersection, 0 - no intersection).</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.Area(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Gets the rectangle area.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>Area of the rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.Center(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Gets rectangle center.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>Center of the rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.Vertices(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Gets rectangle vertexes in clock-wise order staring from left-upper corner.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>Vertexes.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.IsEmptyArea(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Gets whether the rectangle has an empty area. It is different than <see cref="F:DotImaging.Primitives2D.Rectangle.Empty"/> property.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <returns>True if the rectangle has an empty area.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.UpScale(DotImaging.Primitives2D.RectangleF,System.Int32,System.Single)">
+            <summary>
+            Transforms rectangle to the lower pyramid level.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="level">Specifies how many levels to take.</param>
+            <param name="factor">Specifies the pyramid scale factor.</param>
+            <returns>Transformed rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.DownScale(DotImaging.Primitives2D.RectangleF,System.Int32,System.Single)">
+            <summary>
+            Transforms rectangle to the higher pyramid level.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="level">Specifies how many levels to take.</param>
+            <param name="factor">Specifies the pyramid scale factor.</param>
+            <returns>Transformed rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.Inflate(DotImaging.Primitives2D.RectangleF,System.Double,System.Double,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Inflates the rectangle by specified width and height (can be negative) and automatically clamps rectangle coordinates.
+            </summary>
+            <param name="rect">Rectangle to inflate.</param>
+            <param name="widthScale">Horizontal scale.</param>
+            <param name="heightScale">Vertical scale.</param>
+            <param name="constrainedArea">If specified rectangle region will be clamped.</param>
+            <returns>Inflated rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.Scale(DotImaging.Primitives2D.RectangleF,System.Single)">
+            <summary>
+            Scales rectangles by the specified amount.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="scaleFactor">Multiplication factor for vertexes coordinates.</param>
+            <returns>Scaled rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.ScaleTo(DotImaging.Primitives2D.RectangleF,DotImaging.Primitives2D.SizeF,System.Boolean)">
+            <summary>
+            Changes rectangle scale by a minimum amount in term of area change to match the scale of the user-specified size scale.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="other">Size from which the scale is taken.</param>
+            <param name="correctLocation">Moves rectangle to minimize the impact of scaling regarding original location.</param>
+            <returns>Rectangle that has the same scale as </returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.ScaleTo(DotImaging.Primitives2D.RectangleF,System.Single,System.Boolean)">
+            <summary>
+            Changes rectangle scale by a minimum amount in term of area change to match the scale of the user-specified size scale.
+            </summary>
+            <param name="rect">Rectangle.</param>
+            <param name="widthHeightRatio">Width / height ratio that must be satisfied.</param>
+            <param name="correctLocation">Moves rectangle to minimize the impact of scaling regarding original location.</param>
+            <returns>Rectangle that has the same scale as </returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleFExtensions.BoundingRectangle(System.Collections.Generic.IEnumerable{DotImaging.Primitives2D.Rectangle})">
+            <summary>
+            Gets the bounding rectangle of the rectangle collection.
+            </summary>
+            <param name="rectangles">Rectangle collection.</param>
+            <returns>Bounding rectangle.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.SizeExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides size extension methods.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeExtensions.Area(DotImaging.Primitives2D.Size)">
+            <summary>
+            Gets the size area.
+            </summary>
+            <param name="size">Size.</param>
+            <returns>Area.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeExtensions.ToRectangle(DotImaging.Primitives2D.Size)">
+            <summary>
+            Converts the specified size into the rectangle representation with zero offset.
+            </summary>
+            <param name="size">Size.</param>
+            <returns>Rectangle with zero offset.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeExtensions.Scale(DotImaging.Primitives2D.Size,System.Single)">
+            <summary>
+            Scales (multiplies) the provided size with the specified scale factor.
+            </summary>
+            <param name="size">Size.</param>
+            <param name="scale">Scale factor.</param>
+            <returns>Scaled size.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.SizeFExtensions">
+            <summary>
+            <para>Defined functions can be used as object extensions.</para>
+            Provides size extension methods.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeFExtensions.Area(DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Gets the size area.
+            </summary>
+            <param name="size">Size.</param>
+            <returns>Area.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeFExtensions.ToRectangleF(DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Converts the specified size into the rectangle representation with zero offset.
+            </summary>
+            <param name="size">Size.</param>
+            <returns>Rectangle with zero offset.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeFExtensions.Scale(DotImaging.Primitives2D.Size,System.Single)">
+            <summary>
+            Scales (multiplies) the provided size with the specified scale factor.
+            </summary>
+            <param name="size">Size.</param>
+            <param name="scale">Scale factor.</param>
+            <returns>Scaled size.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Point">
+            <summary>
+            Represents the 2D (X, Y) pair.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Point.Empty">
+            <summary>
+            An uninitialized Point structure.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.Ceiling(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Produces a Point structure from a PointF structure by
+            taking the ceiling of the X and Y properties.
+            </summary>
+            <param name="value">Floating-point coordinate pair.</param>
+            <returns>Integer coordinate pair.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.Round(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Produces a Point structure from a PointF structure by
+            rounding the X and Y properties.
+            </summary>
+            <param name="value">Floating-point coordinate pair.</param>
+            <returns>Integer coordinate pair.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.Truncate(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Produces a Point structure from a PointF structure by
+            truncating the X and Y properties.
+            </summary>
+            <param name="value">Floating-point coordinate pair.</param>
+            <returns>Integer coordinate pair.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.Add(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a Point by the positive of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.Subtract(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a Point by the negative of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.op_Addition(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a Point by the positive of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.op_Subtraction(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a Point by the negative of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.op_Equality(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Point)">
+            <summary>
+            Compares two Point objects. The return value is
+            based on the equivalence of the X and Y properties 
+            of the two points.
+            </summary>
+            <param name="left">First structure.</param>
+            <param name="right">Second structure.</param>
+            <returns>Point structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.op_Inequality(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Point)">
+            <summary>
+            Compares two Point objects. The return value is
+            based on the equivalence of the X and Y properties 
+            of the two points.
+            </summary>
+            <param name="left">First structure.</param>
+            <param name="right">Second structure.</param>
+            <returns>Point structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.op_Explicit(DotImaging.Primitives2D.Point)~DotImaging.Primitives2D.Size">
+            <summary>
+            Returns a Size based on the Coordinates of a given 
+            Point. Requires explicit cast.
+            </summary>
+            <param name="p">Point.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.op_Implicit(DotImaging.Primitives2D.Point)~DotImaging.Primitives2D.PointF">
+            <summary>
+            Creates a PointF based on the coordinates of a given 
+            Point. No explicit cast is required.
+            </summary>
+            <param name="p">Point.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.#ctor(System.Int32)">
+            <summary>
+            Creates a Point from an integer which holds the Y
+            coordinate in the high order 16 bits and the X
+            coordinate in the low order 16 bits.
+            </summary>
+            <param name="dw">An integer-packed point.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.#ctor(DotImaging.Primitives2D.Size)">
+            <summary>
+            Creates a Point from a Size value.
+            </summary>
+            <param name="sz">Size.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a PointF from a specified x,y coordinate pair.
+            </summary>
+            <param name="x">X.</param>
+            <param name="y">Y.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Point.IsEmpty">
+            <summary>
+            Indicates if both X and Y are zero.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Point.X">
+            <summary>
+            Gets or sets X value.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Point.Y">
+            <summary>
+            Gets or sets Y value.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.Equals(System.Object)">
+            <summary>
+            Checks equivalence of this PointF and another object.
+            </summary>
+            <param name="obj">Other object.</param>
+            <returns>True if the provided object is equal to this structure, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.GetHashCode">
+            <summary>
+            Calculates a hash value of the object.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.Offset(System.Int32,System.Int32)">
+            <summary>
+            Moves the Point a specified distance.
+            </summary>
+            <param name="dx">Horizontal offset.</param>
+            <param name="dy">Vertical offset.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Point.ToString">
+            <summary>
+            Formats the structure as a string in coordinate notation.
+            </summary>
+            <returns>Structure represented as a string.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.PointF">
+            <summary>
+            Represents the 2D (X, Y) pair.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.PointF.Empty">
+            <summary>
+            An uninitialized PointF structure.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.Add(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Translates a PointF by the positive of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.Subtract(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Translates a PointF by the negative of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.Add(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a PointF by the positive of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.Subtract(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a PointF by the negative of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.op_Addition(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Translates a PointF by the positive of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.op_Subtraction(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Translates a PointF by the negative of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.op_Addition(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a PointF by the positive of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.op_Subtraction(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.Size)">
+            <summary>
+            Translates a PointF by the negative of a specified size.
+            </summary>
+            <param name="pt">Point.</param>
+            <param name="sz">Offset.</param>
+            <returns>Translated point.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.op_Equality(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Compares two PointF objects. The return value is
+            based on the equivalence of the X and Y properties 
+            of the two points.
+            </summary>
+            <param name="left">First structure.</param>
+            <param name="right">Second structure.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.op_Inequality(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Compares two PointF objects. The return value is
+            based on the equivalence of the X and Y properties 
+            of the two points.
+            </summary>
+            <param name="left">First structure.</param>
+            <param name="right">Second structure.</param>
+            <returns>PointF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates a PointF from a specified x,y coordinate pair.
+            </summary>
+            <param name="x">X.</param>
+            <param name="y">Y.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.PointF.IsEmpty">
+            <summary>
+            Indicates if both X and Y are zero.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.PointF.X">
+            <summary>
+            Gets or sets X value.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.PointF.Y">
+            <summary>
+            Gets or sets Y value.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.Equals(System.Object)">
+            <summary>
+            Checks equivalence of this PointF and another object.
+            </summary>
+            <param name="obj">Other object.</param>
+            <returns>True if the provided object is equal to this structure, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.GetHashCode">
+            <summary>
+            Calculates a hash value of the object.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.PointF.ToString">
+            <summary>
+            Formats the structure as a string in coordinate notation.
+            </summary>
+            <returns>Structure represented as a string.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Rectangle">
+            <summary>
+            Stores a set of four integer numbers that represent the location and size of a rectangle.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Rectangle.Empty">
+            <summary>
+            Represents a Rectangle structure with its properties left uninitialized.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.FromLTRB(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Rectangle structure with the specified edge locations.
+            </summary>
+            <param name="left">The x-coordinate of the upper-left corner of this Rectangle structure.</param>
+            <param name="top">The y-coordinate of the upper-left corner of this Rectangle structure.</param>
+            <param name="right">The x-coordinate of the lower-right corner of this Rectangle structure.</param>
+            <param name="bottom">The y-coordinate of the lower-right corner of this Rectangle structure.</param>
+            <returns>The new rectangle that this method creates.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Inflate(DotImaging.Primitives2D.Rectangle,System.Int32,System.Int32)">
+            <summary>
+            Creates and returns an enlarged copy of the specified Rectangle structure. 
+            The copy is enlarged by the specified amount. 
+            The original Rectangle structure remains unmodified.
+            </summary>
+            <param name="rect">The Rectangle with which to start. This rectangle is not modified.</param>
+            <param name="x">The amount to inflate this rectangle horizontally.</param>
+            <param name="y">The amount to inflate this rectangle vertically.</param>
+            <returns>The enlarged rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Inflate(System.Int32,System.Int32)">
+            <summary>
+            Enlarges this rectangle by the specified amount.
+            </summary>
+            <param name="width">The amount to inflate this rectangle horizontally.</param>
+            <param name="height">The amount to inflate this rectangle vertically.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Inflate(DotImaging.Primitives2D.Size)">
+            <summary>
+            Enlarges this rectangle by the specified amount.
+            </summary>
+            <param name="size">The amount to inflate this rectangle.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Intersect(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Returns a third Rectangle structure that represents the intersection of two other Rectangle structures. 
+            If there is no intersection, an empty Rectangle is returned.
+            </summary>
+            <param name="a">A rectangle to intersect.</param>
+            <param name="b">A rectangle to intersect.</param>
+            <returns>A rectangle that represents the intersection of a and b.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Intersect(DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Replaces this rectangle with the intersection of itself and the specified rectangle.
+            </summary>
+            <param name="rect">The rectangle with which to intersect.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.IntersectsWith(DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Determines if this rectangle intersects with <paramref name="rect"/>.
+            </summary>
+            <param name="rect">The rectangle to test.</param>
+            <returns>This method returns true if there is any intersection, otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Union(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Gets a Rectangle structure that contains the union of two Rectangle structures.
+            </summary>
+            <param name="a">A rectangle to union.</param>
+            <param name="b">A rectangle to union.</param>
+            <returns>A Rectangle structure that bounds the union of the two Rectangle structures.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Ceiling(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Converts the specified RectangleF structure to a Rectangle structure by rounding the RectangleF values to the next higher integer values.
+            </summary>
+            <param name="value">The RectangleF structure to be converted.</param>
+            <returns>Returns a rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Round(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Converts the specified RectangleF to a Rectangle by rounding the RectangleF values to the nearest integer values.
+            </summary>
+            <param name="value">The RectangleF to be converted.</param>
+            <returns>A rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Truncate(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Converts the specified RectangleF to a Rectangle by truncating the RectangleF values.
+            </summary>
+            <param name="value">The RectangleF to be converted.</param>
+            <returns>A rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.op_Equality(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Compares two Rectangle objects. The return value is
+            based on the equivalence of the Location and Size 
+            properties of the two rectangles.
+            </summary>
+            <param name="left">A rectangle to compare.</param>
+            <param name="right">A rectangle to compare.</param>
+            <returns>True if two rectangles have the same location and size, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.op_Inequality(DotImaging.Primitives2D.Rectangle,DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Compares two Rectangle objects. The return value is
+            based on the equivalence of the Location and Size 
+            properties of the two rectangles.
+            </summary>
+            <param name="left">A rectangle to compare.</param>
+            <param name="right">A rectangle to compare.</param>
+            <returns>True if two rectangles do not have the same location and size, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.#ctor(DotImaging.Primitives2D.Point,DotImaging.Primitives2D.Size)">
+            <summary>
+            Creates a Rectangle from Point and Size values.
+            </summary>
+            <param name="location">Location.</param>
+            <param name="size">Size.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Rectangle from a specified x,y location and
+            width and height values.
+            </summary>
+            <param name="x">The x-coordinate of the upper-left corner.</param>
+            <param name="y">the y-coordinate of the upper-left corner.</param>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.IsEmpty">
+            <summary>
+            Tests whether all numeric properties of this Rectangle have values of zero.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Left">
+            <summary>
+            Gets the x-coordinate of the left edge of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Right">
+            <summary>
+            Gets the x-coordinate that is the sum of X and Width property values of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Top">
+            <summary>
+            Gets the y-coordinate of the top edge of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Bottom">
+            <summary>
+            Gets the y-coordinate that is the sum of the Y and Height property values of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Height">
+            <summary>
+            Gets or sets the height of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Location">
+            <summary>
+            Gets or sets the coordinates of the upper-left corner of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Size">
+            <summary>
+            Gets or sets the size of this rectangle.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Width">
+            <summary>
+            Gets or sets the width of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.X">
+            <summary>
+            Gets or sets the x-coordinate of the upper-left corner of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Rectangle.Y">
+            <summary>
+            Gets or sets the y-coordinate of the upper-left corner of this Rectangle structure.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Contains(System.Int32,System.Int32)">
+            <summary>
+            Determines if the specified point is contained within this Rectangle structure.
+            </summary>
+            <param name="x">The x-coordinate of the point to test.</param>
+            <param name="y">The y-coordinate of the point to test.</param>
+            <returns>This method returns true if the point defined by x and y is contained within this Rectangle structure; otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Contains(DotImaging.Primitives2D.Point)">
+            <summary>
+            Determines if the specified point is contained within this Rectangle structure.
+            </summary>
+            <param name="pt">The point to test.</param>
+            <returns>This method returns true if the point represented by <paramref name="pt"/> is contained within this Rectangle structure; otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Contains(DotImaging.Primitives2D.Rectangle)">
+            <summary>
+            Determines if the rectangular region represented by <paramref name="rect"/> is entirely contained within this Rectangle structure.
+            </summary>
+            <param name="rect">The Rectangle to test.</param>
+            <returns>This method returns true if the rectangular region represented by <paramref name="rect"/> is entirely contained within this Rectangle structure; otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Offset(System.Int32,System.Int32)">
+            <summary>
+            Adjusts the location of this rectangle by the specified amount.
+            </summary>
+            <param name="x">The horizontal offset.</param>
+            <param name="y">The vertical offset.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Offset(DotImaging.Primitives2D.Point)">
+            <summary>
+            Adjusts the location of this rectangle by the specified amount.
+            </summary>
+            <param name="pos">Amount to offset the location.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.Equals(System.Object)">
+            <summary>
+            Tests whether obj is a Rectangle structure with the same location and size of this Rectangle structure.
+            </summary>
+            <param name="obj">The System.Object to test.</param>
+            <returns>This method returns true if obj is a Rectangle structure and its X, Y, Width, and Height properties are equal to the corresponding properties of this Rectangle structure; otherwise, false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.GetHashCode">
+            <summary>
+            Returns the hash code for this Rectangle structure. For information about the use of hash codes, see System.Object.GetHashCode() .
+            </summary>
+            <returns>An integer that represents the hash code for this rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Rectangle.ToString">
+            <summary>
+            Converts the attributes of this System.Drawing.Rectangle to a human-readable string.
+            </summary>
+            <returns>A string in (x,y,w,h) notation</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.RectangleF">
+            <summary>
+            Stores a set of four floating-point numbers that represent the location and size of a rectangle.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.RectangleF.Empty">
+            <summary>
+            Represents a RectangleF structure with its properties left uninitialized.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.FromLTRB(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a RectangleF structure with the specified edge locations.
+            </summary>
+            <param name="left">The x-coordinate of the upper-left corner of this RectangleF structure.</param>
+            <param name="top">The y-coordinate of the upper-left corner of this RectangleF structure.</param>
+            <param name="right">The x-coordinate of the lower-right corner of this RectangleF structure.</param>
+            <param name="bottom">The y-coordinate of the lower-right corner of this RectangleF structure.</param>
+            <returns>The new rectangle that this method creates.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Inflate(DotImaging.Primitives2D.RectangleF,System.Single,System.Single)">
+            <summary>
+            Creates and returns an enlarged copy of the specified RectangleF structure. 
+            The copy is enlarged by the specified amount. 
+            The original RectangleF structure remains unmodified.
+            </summary>
+            <param name="rect">The RectangleF with which to start. This rectangle is not modified.</param>
+            <param name="x">The amount to inflate this rectangle horizontally.</param>
+            <param name="y">The amount to inflate this rectangle vertically.</param>
+            <returns>The enlarged rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Inflate(System.Single,System.Single)">
+            <summary>
+            Enlarges this rectangle by the specified amount.
+            </summary>
+            <param name="width">The amount to inflate this rectangle horizontally.</param>
+            <param name="height">The amount to inflate this rectangle vertically.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Inflate(DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Enlarges this rectangle by the specified amount.
+            </summary>
+            <param name="size">The amount to inflate this rectangle.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Intersect(DotImaging.Primitives2D.RectangleF,DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Returns a third RectangleF structure that represents the intersection of two other RectangleF structures. 
+            If there is no intersection, an empty Rectangle is returned.
+            </summary>
+            <param name="a">A rectangle to intersect.</param>
+            <param name="b">A rectangle to intersect.</param>
+            <returns>A rectangle that represents the intersection of a and b.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Intersect(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Replaces this rectangle with the intersection of itself and the specified rectangle.
+            </summary>
+            <param name="rect">The rectangle with which to intersect.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.IntersectsWith(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Determines if this rectangle intersects with <paramref name="rect"/>.
+            </summary>
+            <param name="rect">The rectangle to test.</param>
+            <returns>This method returns true if there is any intersection, otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Union(DotImaging.Primitives2D.RectangleF,DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Gets a RectangleF structure that contains the union of two RectangleF structures.
+            </summary>
+            <param name="a">A rectangle to union.</param>
+            <param name="b">A rectangle to union.</param>
+            <returns>A RectangleF structure that bounds the union of the two RectangleF structures.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.op_Equality(DotImaging.Primitives2D.RectangleF,DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Compares two RectangleF objects. The return value is
+            based on the equivalence of the Location and Size 
+            properties of the two rectangles.
+            </summary>
+            <param name="left">A rectangle to compare.</param>
+            <param name="right">A rectangle to compare.</param>
+            <returns>True if two rectangles have the same location and size, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.op_Inequality(DotImaging.Primitives2D.RectangleF,DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Compares two Rectangle objects. The return value is
+            based on the equivalence of the Location and Size 
+            properties of the two rectangles.
+            </summary>
+            <param name="left">A rectangle to compare.</param>
+            <param name="right">A rectangle to compare.</param>
+            <returns>True if two rectangles do not have the same location and size, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.op_Implicit(DotImaging.Primitives2D.Rectangle)~DotImaging.Primitives2D.RectangleF">
+            <summary>
+            Converts a Rectangle object to a RectangleF.
+            </summary>
+            <param name="r">Rectangle.</param>
+            <returns>A RectangleF representation.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.#ctor(DotImaging.Primitives2D.PointF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Creates a RectangleF from PointF and SizeF values.
+            </summary>
+            <param name="location">Location.</param>
+            <param name="size">Size.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Creates a RectangleF from a specified x,y location and
+            width and height values.
+            </summary>
+            <param name="x">The x-coordinate of the upper-left corner.</param>
+            <param name="y">the y-coordinate of the upper-left corner.</param>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.IsEmpty">
+            <summary>
+            Tests whether all numeric properties of this RectangleF have values of zero.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Left">
+            <summary>
+            Gets the x-coordinate of the left edge of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Right">
+            <summary>
+            Gets the x-coordinate that is the sum of X and Width property values of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Top">
+            <summary>
+            Gets the y-coordinate of the top edge of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Bottom">
+            <summary>
+            Gets the y-coordinate that is the sum of the Y and Height property values of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Location">
+            <summary>
+            Gets or sets the coordinates of the upper-left corner of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Size">
+            <summary>
+            Gets or sets the size of this rectangle.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Width">
+            <summary>
+            Gets or sets the width of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Height">
+            <summary>
+            Gets or sets the height of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.X">
+            <summary>
+            Gets or sets the x-coordinate of the upper-left corner of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.RectangleF.Y">
+            <summary>
+            Gets or sets the y-coordinate of the upper-left corner of this RectangleF structure.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Contains(System.Single,System.Single)">
+            <summary>
+            Determines if the specified point is contained within this RectangleF structure.
+            </summary>
+            <param name="x">The x-coordinate of the point to test.</param>
+            <param name="y">The y-coordinate of the point to test.</param>
+            <returns>This method returns true if the point defined by x and y is contained within this RectangleF structure; otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Contains(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Determines if the specified point is contained within this RectangleF structure.
+            </summary>
+            <param name="pt">The point to test.</param>
+            <returns>This method returns true if the point represented by <paramref name="pt"/> is contained within this RectangleF structure; otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Contains(DotImaging.Primitives2D.RectangleF)">
+            <summary>
+            Determines if the rectangular region represented by <paramref name="rect"/> is entirely contained within this RectangleF structure.
+            </summary>
+            <param name="rect">The Rectangle to test.</param>
+            <returns>This method returns true if the rectangular region represented by <paramref name="rect"/> is entirely contained within this RectangleF structure; otherwise false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Offset(System.Single,System.Single)">
+            <summary>
+            Adjusts the location of this rectangle by the specified amount.
+            </summary>
+            <param name="x">The horizontal offset.</param>
+            <param name="y">The vertical offset.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Offset(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Adjusts the location of this rectangle by the specified amount.
+            </summary>
+            <param name="pos">Amount to offset the location.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.Equals(System.Object)">
+            <summary>
+            Tests whether obj is a RectangleF structure with the same location and size of this RectangleF structure.
+            </summary>
+            <param name="obj">The System.Object to test.</param>
+            <returns>This method returns true if obj is a Rectangle structure and its X, Y, Width, and Height properties are equal to the corresponding properties of this RectangleF structure; otherwise, false.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.GetHashCode">
+            <summary>
+            Returns the hash code for this RectangleF structure. For information about the use of hash codes, see System.Object.GetHashCode() .
+            </summary>
+            <returns>An integer that represents the hash code for this rectangle.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.RectangleF.ToString">
+            <summary>
+            Converts the attributes of this System.Drawing.Rectangle to a human-readable string.
+            </summary>
+            <returns>A string in (x,y,w,h) notation</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.Size">
+            <summary>
+            Stores an ordered pair of integer numbers, which specify height and width and defines related functions.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.Size.Empty">
+            <summary>
+            An uninitialized Size structure.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.Add(DotImaging.Primitives2D.Size,DotImaging.Primitives2D.Size)">
+            <summary>
+            Adds two Size structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.Subtract(DotImaging.Primitives2D.Size,DotImaging.Primitives2D.Size)">
+            <summary>
+            Subtracts two Size structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.op_Addition(DotImaging.Primitives2D.Size,DotImaging.Primitives2D.Size)">
+            <summary>
+            Addition of two Size structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.op_Subtraction(DotImaging.Primitives2D.Size,DotImaging.Primitives2D.Size)">
+            <summary>
+            Subtracts two Size structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.Ceiling(DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Produces a Size structure from a SizeF structure by
+            taking the ceiling of the Width and Height properties.
+            </summary>
+            <param name="value">Floating-point size structure.</param>
+            <returns>Integer size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.Round(DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Produces a Size structure from a SizeF structure by
+            rounding the Width and Height properties.
+            </summary>
+            <param name="value">Floating-point size structure.</param>
+            <returns>Integer size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.Truncate(DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Produces a Size structure from a SizeF structure by
+            truncating the Width and Height properties.
+            </summary>
+            <param name="value">Floating-point size structure.</param>
+            <returns>Integer size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.op_Equality(DotImaging.Primitives2D.Size,DotImaging.Primitives2D.Size)">
+            <summary>
+            Compares two Size objects. The return value is
+            based on the equivalence of the Width and Height 
+            properties of the two Size structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.op_Inequality(DotImaging.Primitives2D.Size,DotImaging.Primitives2D.Size)">
+            <summary>
+            Compares two Size objects. The return value is
+            based on the equivalence of the Width and Height 
+            properties of the two Size structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.op_Explicit(DotImaging.Primitives2D.Size)~DotImaging.Primitives2D.Point">
+            <summary>
+            Returns a Point based on the dimensions of a given 
+            Size. Requires explicit cast.
+            </summary>
+            <param name="size">Size structure.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.op_Implicit(DotImaging.Primitives2D.Size)~DotImaging.Primitives2D.SizeF">
+            <summary>
+            Creates a SizeF based on the dimensions of a given 
+            Size. No explicit cast is required.
+            </summary>
+            <param name="p"></param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.#ctor(DotImaging.Primitives2D.Point)">
+            <summary>
+            Creates a Size from a Point value.
+            </summary>
+            <param name="pt">Point.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a Size from specified dimensions.
+            </summary>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Size.IsEmpty">
+            <summary>
+            Indicates if both width and height are zero.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Size.Width">
+            <summary>
+            Gets or sets width value.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.Size.Height">
+            <summary>
+            Gets or sets height value.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.Equals(System.Object)">
+            <summary>
+            Checks equivalence of this Size and another object.
+            </summary>
+            <param name="obj">Other object.</param>
+            <returns>True if the provided object is equal to this structure, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.GetHashCode">
+            <summary>
+            Calculates a hash value of the object.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.Size.ToString">
+            <summary>
+            Formats the structure as a string in coordinate notation.
+            </summary>
+            <returns>Structure represented as a string.</returns>
+        </member>
+        <member name="T:DotImaging.Primitives2D.SizeF">
+            <summary>
+            Stores an ordered pair of floating-point numbers, which specify height and width and defines related functions.
+            </summary>
+        </member>
+        <member name="F:DotImaging.Primitives2D.SizeF.Empty">
+            <summary>
+            An uninitialized Size structure.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.Add(DotImaging.Primitives2D.SizeF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Adds two SizeF structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>SizeF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.Subtract(DotImaging.Primitives2D.SizeF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Subtracts two SizeF structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>SizeF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.ToPointF">
+            <summary>
+            Converts the structure to PointF representation.
+            </summary>
+            <returns>PointF.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.ToSize">
+            <summary>
+            Converts the structure to Size representation.
+            </summary>
+            <returns>Size.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.op_Addition(DotImaging.Primitives2D.SizeF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Adds two SizeF structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.op_Subtraction(DotImaging.Primitives2D.SizeF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Subtracts two Size structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>Size structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.op_Equality(DotImaging.Primitives2D.SizeF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Compares two SizeF objects. The return value is
+            based on the equivalence of the Width and Height 
+            properties of the two SizeF structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>SizeF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.op_Inequality(DotImaging.Primitives2D.SizeF,DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Compares two SizeF objects. The return value is
+            based on the equivalence of the Width and Height 
+            properties of the two SizeF structures.
+            </summary>
+            <param name="sz1">First structure.</param>
+            <param name="sz2">Second structure.</param>
+            <returns>SizeF structure.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.op_Explicit(DotImaging.Primitives2D.SizeF)~DotImaging.Primitives2D.PointF">
+            <summary>
+            Returns a PointF based on the dimensions of a given 
+            SizeF. Requires explicit cast.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.#ctor(DotImaging.Primitives2D.PointF)">
+            <summary>
+            Creates a SizeF from a PointF value.
+            </summary>
+            <param name="pt">PointF.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.#ctor(DotImaging.Primitives2D.SizeF)">
+            <summary>
+            Creates a SizeF from an existing SizeF value.
+            </summary>
+            <param name="sz">Size.</param>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates a SizeF from specified dimensions.
+            </summary>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+        </member>
+        <member name="P:DotImaging.Primitives2D.SizeF.IsEmpty">
+            <summary>
+            Indicates if both width and height are zero.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.SizeF.Width">
+            <summary>
+            Gets or sets width value.
+            </summary>
+        </member>
+        <member name="P:DotImaging.Primitives2D.SizeF.Height">
+            <summary>
+            Gets or sets height value.
+            </summary>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.Equals(System.Object)">
+            <summary>
+            Checks equivalence of this SizeF and another object.
+            </summary>
+            <param name="obj">Other object.</param>
+            <returns>True if the provided object is equal to this structure, false otherwise.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.GetHashCode">
+            <summary>
+            Calculates a hash value of the object.
+            </summary>
+            <returns>Hash code.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.op_Explicit(DotImaging.Primitives2D.SizeF)~DotImaging.Primitives2D.Size">
+            <summary>
+            Truncates width and height value and returns integer representation of the size.
+            </summary>
+            <param name="size">Size to convert into integer Size representation.</param>
+            <returns>Integer Size representation.</returns>
+        </member>
+        <member name="M:DotImaging.Primitives2D.SizeF.ToString">
+            <summary>
+            Formats the structure as a string in coordinate notation.
+            </summary>
+            <returns>Structure represented as a string.</returns>
+        </member>
+    </members>
+</doc>

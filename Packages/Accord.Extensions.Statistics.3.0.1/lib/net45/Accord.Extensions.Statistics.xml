@@ -1,0 +1,1474 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Accord.Extensions.Statistics</name>
+    </assembly>
+    <members>
+        <member name="T:Accord.Extensions.Statistics.Filters.KalmanFilterExtensions">
+            <summary>
+            Extension methods for the Kalman filter.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilterExtensions.CalculateDistanceMatrix``3(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``2},System.Boolean)">
+            <summary>
+            Calculates Mahalanobis distance between each (tracker, measurement pair).
+            </summary>
+            <typeparam name="TTracker">Kalman filter tracker.</typeparam>
+            <typeparam name="TState">Kalman filter state type..</typeparam>
+            <typeparam name="TMeasurement">Measurement type.</typeparam>
+            <param name="trackers">Kalman filter trackers.</param>
+            <param name="measurements">Measurements.</param>
+            <param name="gateDistances">
+            If true the distance will be compared with gating threshold and if the distance exceeds the distance threshold <see cref="F:System.Double.PositiveInfinity"/> value will be written.
+            <para>The gating is obtained as 99 percent probability interval of the Kalman residual covariance.</para>
+            </param>
+            <returns>Distance matrix [tracks x detections].</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel">
+            <summary>
+            Perspective projection model for 2D case.
+            Model is constructed as following:
+            p(i) = (f * D) / (f * D + v(k-1) * d(k-1) * dt) * p(k-1)
+            d(k) = (f * D) / (f * D + v(k-1) * d(k-1) * dt) * d(k-1)
+            v(k) - user defined (constant or updated by constant acceleration model)
+            
+            where variables are:
+            f - focal length
+            D - object width in real word
+            d - object width in an image
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.Dimension">
+            <summary>
+            Gets the dimension of the model.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.ImagePosition">
+            <summary>
+            Gets or sets the object position.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.ImageObjectWidth">
+            <summary>
+            Gets or sets the image object width.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.Velocity">
+            <summary>
+            Gets or sets the real world velocity.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.Evaluate(System.Double,System.Double)">
+            <summary>
+            Evaluates the model by using the provided parameters. The velocity value is copied.
+            </summary>
+            <param name="timeInterval">Time interval.</param>
+            <param name="velocityMultiplierConst">Velocity multiplier which is calculated by using: <see cref="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.CalculateVelocityMultiplierConstant(System.Double,System.Double,System.Double)"/> function.</param>
+            <returns>New model state.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.CalculateVelocityMultiplierConstant(System.Double,System.Double,System.Double)">
+            <summary>
+            Calculates velocity multiplier constant.
+            </summary>
+            <param name="objectWorldWidth">Real world object width.</param>
+            <param name="focalLength">Focal length of the camera.</param>
+            <param name="meterToPixelMultiplier">Meter to pixel constant (depends on camera sensor).</param>
+            <returns>Velocity multiplier constant</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.EstimateTransitionMatrix(System.Double,System.Double)">
+            <summary>
+            Estimates transition matrix using numeric Jacobian calculation.
+            <para>If using Kalman, transition matrix must be updated in each step because the model is not linear.</para>
+            </summary>
+            <param name="velocityMultiplierConst">Velocity multiplier constant</param>
+            <param name="delta">Delta factor for Jacobian estimation.</param>
+            <returns>Estimated transition matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.GetMeasurementMatrix">
+            <summary>
+            Gets the measurement matrix [3 x 4] - [X, Y, velocity].
+            </summary>
+            <returns>Measurement matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.FromArray(System.Double[])">
+            <summary>
+            Converts the array to the model.
+            </summary>
+            <param name="arr">Array to convert from.</param>
+            <returns>Model.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.ToArray(Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel)">
+            <summary>
+            Converts the model to the array.
+            </summary>
+            <param name="modelState">Model to convert.</param>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel.Clone">
+            <summary>
+            Clones the model.
+            </summary>
+            <returns>The copy of the model.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModelExtensions">
+            <summary>
+            Contains extensions for perspective 2D model.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModelExtensions.Translate(Accord.Extensions.Statistics.Filters.PerspectiveProjection2DModel,DotImaging.Primitives2D.PointF)">
+            <summary>
+            Translates the position of the model.
+            </summary>
+            <param name="state">Current state.</param>
+            <param name="offset">Position offset.</param>
+            <returns>New state.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.EntropyTrackerRemoval">
+            <summary>
+            Provides extension methods for the multi-object entropy track(er) removal management.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.EntropyTrackerRemoval.Remove``1(System.Collections.Generic.List{``0},System.Func{``0,System.Double},System.Double,System.Double)">
+            <summary>
+            Removes tracks if the track entropy is above the specified threshold <paramref name="maxEntropyIncrease"/>. 
+            Also updates track entropy and tentative state. 
+            </summary>
+            <typeparam name="TTrack">Track type.</typeparam>
+            <param name="tracks">Collection of tracks.</param>
+            <param name="calculateEntropy">Function for the track entropy calculation.</param>
+            <param name="minEntropyDecrease">Minimal entropy decrease to mark a track as non-tentative.</param>
+            <param name="maxEntropyIncrease">Maximal entropy increase to remove a track.</param>
+            <returns>True if at least one track is removed, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.EntropyTrackerRemoval.Remove``4(System.Collections.Generic.List{``0},System.Double,System.Double)">
+            <summary>
+            Removes tracks if the track entropy is above the specified threshold <paramref name="maxEntropyIncrease"/>. 
+            Also updates track entropy and tentative state. 
+            </summary>
+            <typeparam name="TTrack">Track type.</typeparam>
+            <typeparam name="TKalman">Kalman filter type.</typeparam>
+            <typeparam name="TState">Kalman state type.</typeparam>
+            <typeparam name="TMeasurement">Kalman measurement type.</typeparam>
+            <param name="tracks">Collection of tracks.</param>
+            <param name="minEntropyDecrease">Minimal entropy decrease to mark a track as non-tentative.</param>
+            <param name="maxEntropyIncrease">Maximal entropy increase to remove a track.</param>
+            <returns>True if at least one track is removed, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.EntropyTrackerRemoval.Remove``3(System.Collections.Generic.List{``0},System.Func{``2,System.Double[]},System.Double,System.Double)">
+            <summary>
+            Removes tracks if the track entropy is above the specified threshold <paramref name="maxEntropyIncrease"/>. 
+            Also updates track entropy and tentative state. 
+            </summary>
+            <typeparam name="TTrack">Track type.</typeparam>
+            <typeparam name="TParticleFilter">Particle filter type.</typeparam>
+            <typeparam name="TParticle">Particle type.</typeparam>
+            <param name="tracks">Collection of tracks.</param>
+            <param name="stateConverter">Particle state converter.</param>
+            <param name="minEntropyDecrease">Minimal entropy decrease to mark a track as non-tentative.</param>
+            <param name="maxEntropyIncrease">Maximal entropy increase to remove a track.</param>
+            <returns>True if at least one track is removed, false otherwise.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.IEntropyTrack">
+            <summary>
+            Interface for a track which removal wants to be handled by entropy threshold.
+            <para>See <see cref="T:Accord.Extensions.Statistics.Filters.EntropyTrackerRemoval"/> class.</para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.IEntropyTrack.InitialEntropy">
+            <summary>
+            Initial track(er) entropy.
+            <para>The value is modified by entropy management internally.</para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.IEntropyTrack.IsTentative">
+            <summary>
+            True if the track is tentative, false if not. 
+            <para>The value must be null as the track values will be initialized by entropy management itself.</para>
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.IEntropyTrack`1">
+            <summary>
+            Interface for a track which removal wants to be handled by entropy threshold.
+            <para>See <see cref="T:Accord.Extensions.Statistics.Filters.EntropyTrackerRemoval"/> class.</para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.IEntropyTrack`1.Tracker">
+            <summary>
+            Tracker for the track.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.JPDAF">
+            <summary>
+            Joint probability data association filter (JPDAF).
+            See: <a href="https://bib.irb.hr/datoteka/519441.MSMT_Tracking_ECMR2011.pdf"/> for details.
+            </summary>
+            <summary>
+            Joint probability data association filter (JPDAF).
+            See: <a href="https://bib.irb.hr/datoteka/519441.MSMT_Tracking_ECMR2011.pdf"/> for details.
+            </summary>
+            <summary>
+            Joint probability data association filter (JPDAF).
+            See: <a href="https://bib.irb.hr/datoteka/519441.MSMT_Tracking_ECMR2011.pdf"/> for details.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.Update``3(System.Collections.Generic.IList{``0},System.Collections.Generic.List{``2},System.Double,System.Double)">
+            <summary>
+            Updates Kalman filters according to the calculated measurement-track association probability.
+            </summary>
+            <typeparam name="TFilter">Filter type.</typeparam>
+            <typeparam name="TState">Kalman filter state type.</typeparam>
+            <typeparam name="TMeasurement">Kalman filter measurement type.</typeparam>
+            <param name="kalmanFilters">Kalman filters.</param>
+            <param name="measurements">Measurements at current time.</param>
+            <param name="detectionProbability">Detection probability.</param>
+            <param name="falseAlarmProbability">False alarm probability.</param>
+            <returns>Measurement-track probability association matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.AddFilters``3(System.Collections.Generic.List{``0},System.Double[0:,0:],System.Action{System.Int32},System.Double)">
+            <summary>
+            Executes a user-specified function if new filters should be added. 
+            New filters should be added if the marginal measurement probability is smaller than <paramref name="minMarginalMeasurementlProbability"/>.
+            </summary>
+            <typeparam name="TFilter">Filter type.</typeparam>
+            <typeparam name="TState">Kalman filter state type.</typeparam>
+            <typeparam name="TMeasurement">Kalman filter measurement type.</typeparam>
+            <param name="kalmanFilters">Kalman filters.</param>
+            <param name="associationProbabilites">Association probability matrix of an measurement-track association probability. Size: [nMeasurements x nTracks].</param>
+            <param name="kalmanFilterAddFunc">
+            Kalman filter creation function.
+            Parameters: measurement index.
+            </param>
+            <param name="minMarginalMeasurementlProbability">Minimal marginal measurement probability that needs to exist to consider that the measurement is associated with a track.</param>
+            <returns>True if the filter is added, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.AddFilters``3(System.Collections.Generic.List{``0},System.Double[0:,0:],System.Func{System.Int32,``0},System.Double)">
+            <summary>
+            Add new filters if the marginal measurement probability is smaller than <paramref name="minMarginalMeasurementlProbability"/>.
+            </summary>
+            <typeparam name="TFilter">Filter type.</typeparam>
+            <typeparam name="TState">Kalman filter state type.</typeparam>
+            <typeparam name="TMeasurement">Kalman filter measurement type.</typeparam>
+            <param name="kalmanFilters">Kalman filters.</param>
+            <param name="associationProbabilites"></param>
+            <param name="kalmanFilterCreatorFunc">
+            Particle filter creation function.
+            Parameters: measurement index.
+            Returns: particle filter.
+            </param>
+            <param name="minMarginalMeasurementlProbability">Minimal marginal measurement probability that needs to exist to consider that the measurement is associated with a track.</param>
+            <returns>True if the filter is added, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.Select``3(System.Collections.Generic.IEnumerable{``0},System.Func{System.Int32,``0,System.Boolean})">
+            <summary>
+            Selects Kalman filter indices by using user-specified selector function.
+            </summary>
+            <typeparam name="TFilter">Filter type.</typeparam>
+            <typeparam name="TState">Kalman filter state type.</typeparam>
+            <typeparam name="TMeasurement">Kalman filter measurement type.</typeparam>
+            <param name="kalmanFilters">Kalman filters.</param>
+            <param name="selector">
+            Selector function.
+            Parameters: Kalman filter index, particle filter.
+            Returns: true if the filter needs to be selected.
+            </param>
+            <returns>Selected Kalman filter indicies in the collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.calculateAssciationProbabilities(System.Double[0:,0:],System.Double,System.Double)">
+            <summary>
+            Calculates measurement-track probability association matrix.
+            <para>Generates association matrices and sums the probabilities for each case (flattens hypothesizes).</para>
+            </summary>
+            <param name="probsZX">
+            Matrix that contains how much each measurement corresponds to each filter.
+            <para>If an element of the matrix is zero, the corresponding association will not be considered.</para>
+            </param>
+            <param name="detectionProbability">Detection probability.</param>
+            <param name="falseAlarmProbability">False alarm probability.</param>
+            <returns>Measurement-track probability association matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.Update``3(System.Collections.Generic.IList{``0},System.Collections.Generic.List{``2},System.Func{``1,``2,System.Double},System.Func{``0,``0},System.Double,System.Double,System.Func{``2,``0,System.Boolean})">
+            <summary>
+            Updates particle filters according to the calculated measurement-track association probability.
+            </summary>
+            <typeparam name="TFilter">Filter type.</typeparam>
+            <typeparam name="TParticle">Particle type.</typeparam>
+            <typeparam name="TMeasurement">Measurement type.</typeparam>
+            <param name="particleFilters">Particle filters.</param>
+            <param name="measurements">Measurements at current time.</param>
+            <param name="likelihoodFunc">
+            Likelihood function to calculate measurement-particle association likelihood (does not have to be normalized). 
+            Parameters: particle, measurement.
+            Returns: measurement-particle association likelihood.
+            </param>
+            <param name="resample">
+            Filter resample function.
+            Parameters: filter (particle collection), particle weights.
+            Returns: re-sampled particles.
+            </param>
+            <param name="detectionProbability">Detection probability.</param>
+            <param name="falseAlarmProbability">False alarm probability.</param>
+            <param name="considerAssociation">
+            Consider association function. If null all associations will be considered (can decrease performance if the number of tracked objects is large).
+            Parameters: measurement, filter.
+            Returns: true if the association needs to be considered, false otherwise.
+            </param>
+            <returns>Measurement-track probability association matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.AddFilters``1(System.Collections.Generic.List{``0},System.Double[0:,0:],System.Action{System.Int32},System.Double)">
+            <summary>
+            Executes a user-specified function if new filters should be added. 
+            New filters should be added if the marginal measurement probability is smaller than <paramref name="minMarginalMeasurementlProbability"/>.
+            </summary>
+            <typeparam name="TFilter">Filter type.</typeparam>
+            <param name="particleFilters">Particle filters.</param>
+            <param name="associationProbabilites">Measurement-track associations probabilities generated by Update function.</param>
+            <param name="particleFilterAddFunc">
+            Particle filter creation function.
+            Parameters: measurement index.
+            </param>
+            <param name="minMarginalMeasurementlProbability">Minimal marginal measurement probability that needs to exist to consider that the measurement is associated with a track.</param>
+            <returns>True if the filter is added, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.JPDAF.AddFilters``1(System.Collections.Generic.List{``0},System.Double[0:,0:],System.Func{System.Int32,``0},System.Double)">
+            <summary>
+            Add new filters if the marginal measurement probability is smaller than <paramref name="minMarginalMeasurementlProbability"/>.
+            </summary>
+            <typeparam name="TFilter">Filter type.</typeparam>
+            <param name="particleFilters">Particle filters.</param>
+            <param name="associationProbabilites">Measurement-track associations probabilities generated by Update function.</param>
+            <param name="particleFilterCreatorFunc">
+            Particle filter creation function.
+            Parameters: measurement index.
+            Returns: particle filter.
+            </param>
+            <param name="minMarginalMeasurementlProbability">Minimal marginal measurement probability that needs to exist to consider that the measurement is associated with a track.</param>
+            <returns>True if the filter is added, false otherwise.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.KalmanFilter`2">
+            <summary>
+            A Kalman filter is a recursive solution to the general dynamic estimation problem for the
+            important special case of linear system models and Gaussian noise.
+            <para>The Kalman Filter uses a predictor-corrector structure, in which
+            if a measurement of the system is available at time <italic>t</italic>,
+            We first call the Predict function, to estimate the state of the system
+            at time <italic>t</italic>. We then call the Correct function to
+            correct the estimate of state, based on the noisy measurement.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.#ctor(`0,System.Double[0:,0:],System.Int32,System.Int32,System.Func{`0,System.Double[]},System.Func{System.Double[],`0},System.Func{`1,System.Double[]})">
+             <summary>
+             Creates Kalman filter.
+             </summary>
+             <param name="initialState">The best estimate of the initial state. [1 x n] vector. It's dimension is - n.</param>
+             <param name="initialStateError">Initial error for a state: (assumed values – actual values)^2 + the variance of the values.
+             <para>e.g. if using ConstantAccelerationModel it can be specified as: Matrix.Diagonal(StateVectorDimension, [x, y, vX, vY, aX, aY]);</para> 
+             </param>
+            <param name="measurementVectorDimension">Dimensionality of the measurement vector - p.</param>
+             <param name="controlVectorDimension">Dimensionality of the control vector - k. If there is no external control put 0.</param>
+             <param name="stateConvertFunc">State conversion function: TState => double[]</param>
+             <param name="stateConvertBackFunc">State conversion function: double[] => TState</param>
+             <param name="measurementConvertFunc">Measurement conversion function: TMeasurement => double[]</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.checkPrerequisites">
+            <summary>
+            Checks pre-conditions: matrix sizes.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.KalmanFilter`2.state">
+            <summary>
+            State.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.State">
+            <summary>
+            Gets state (x(k)). [1 x n] vector.
+            After obtaining a measurement z(k) predicted state will be corrected.
+            This value is used as an ultimate result.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.ResidualCovariance">
+            <summary>
+            Gets Kalman covariance matrix (S). [p x p] matrix.
+            This matrix servers for Kalman gain calculation.
+            <para>The matrix along with innovation vector can be used to achieve gating in JPDAF. See: <see cref="T:Accord.Extensions.Statistics.Filters.JPDAF"/> filter.</para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.ResidualCovarianceInv">
+            <summary>
+            Gets the inverse of covariance matrix. See: <see cref="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.ResidualCovariance"/>.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.KalmanGain">
+            <summary>
+            Gets Kalman gain matrix (K). [n x p] matrix.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.EstimateCovariance">
+            <summary>
+            Gets error estimate covariance matrix (P(k)). [n x n] matrix.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.Predict">
+            <summary>
+            Estimates the subsequent model state. 
+            This function is implementation-dependent.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.Predict(System.Double[])">
+            <summary>
+            Estimates the subsequent model state.
+            This function is implementation-dependent.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.predictInternal(System.Double[])">
+            <summary>
+            Predicts the next state using the current state and <paramref name="controlVector"/>.
+            </summary>
+            <param name="controlVector">Set of data for external system control.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.Correct(`1)">
+            <summary>
+            Corrects the state error covariance based on innovation vector and Kalman update.
+            </summary>
+            <param name="measurement">The measurement.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.CorrectInternal(System.Double[])">
+            <summary>
+            Corrects the state by using the provided measurement.
+            </summary>
+            <param name="measurement">Measurement.</param>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.TransitionMatrix">
+            <summary>
+            Gets or sets state transition matrix (A). [n x n] matrix.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.ControlMatrix">
+            <summary>
+            Gets or sets control matrix (B). [n x k] vector.
+            It is not used if there is no control.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.MeasurementMatrix">
+            <summary>
+            Gets or sets measurement matrix (H). [p x n] matrix, where p is a dimension of measurement vector. <br/>
+            <para>Selects components from a state vector that are obtained by measurement.</para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.ProcessNoise">
+            <summary>
+            Gets or sets process noise covariance matrix (Q). [n x n] matrix.
+            <para>Deviation of selected and actual model. 
+            e.g. for constant acceleration model it can be defined as: Matrix.Diagonal(StateVectorDimension, [x, y, vX, vY, aX, aY]); where usually (position error) &lt; (velocity error) &lt; (acceleration error).</para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.MeasurementNoise">
+            <summary>
+            Gets or sets measurement noise covariance matrix (R). [p x p] matrix.
+            <para>Variance inaccuracy of detected location. 
+            It is usually defined as scalar, therefore it can be set as: Matrix.Diagonal(MeasurementVectorDimension, [value]);</para>
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.StateVectorDimension">
+            <summary>
+            Gets state dimensionality.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.MeasurementVectorDimension">
+            <summary>
+            Gets measurement dimensionality.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.ControlVectorDimension">
+            <summary>
+            Gets control vector dimensionality.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.CalculateDelta(`1)">
+            <summary>
+            Calculates the residual from the measurement and the current state.
+            </summary>
+            <param name="measurement">Measurement.</param>
+            <returns>Residual, error or innovation vector.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.CalculateMahalanobisDistance(`1,System.Double[]@)">
+            <summary>
+            Calculates Mahalanobis distance between the provided measurement and the predicted state.
+            <para>Covariance matrix is the <see cref="P:Accord.Extensions.Statistics.Filters.KalmanFilter`2.ResidualCovariance"/>.</para>
+            </summary>
+            <param name="measurement">Measurement.</param>
+            <param name="delta">The residual from the measurement and the current state.</param>
+            <returns>Mahalanobis distance.</returns>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.KalmanFilter`2.gateThreshold">
+            <summary>
+            Upper limit which includes valid measurements (gating) with 99% probability
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.IsMeasurementInsideGate(`1,System.Double[]@,System.Double@)">
+            <summary>
+            Calculates Mahalanobis distance and compares distance and gate threshold.
+            <para>Gate threshold is obtained by calculating the 99 percent interval for the residual covariance.</para>
+            </summary>
+            <param name="measurement">Measurement.</param>
+            <param name="delta">The residual from the measurement and the current state.</param>
+            <param name="mahalanobisDistance">Mahalanobis distance.</param>
+            <returns>True if the measurement is inside the gating, false otherwise.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.CalculateEntropy">
+            <summary>
+            Calculates entropy from the error covariance matrix.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.CalculateEntropy(System.Double[0:,0:])">
+            <summary>
+            Calculates entropy from the provided error covariance matrix.
+            </summary>
+            <param name="errorCovariance">Error covariance matrix.</param>
+            <returns>Entropy.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.KalmanFilter`2.GetEllipse(System.Func{`0,DotImaging.Primitives2D.PointF},System.Double,System.Double[0:,0:])">
+            <summary>
+            Gets the spatial representation of the error covariance. 
+            </summary>
+            <param name="positionSelector">Position selector function.</param>
+            <param name="confidence">
+            Confidence for the Chi-square distribution. 
+            H * P * H' has the Chi-square distribution where H is measurement matrix and P is error covariance matrix.
+            </param>
+            <param name="positionSelectionMatrix">Measurement matrix which selects state position. If null the state measurement matrix will be used.</param>
+            <returns>2D representation of the error covariance.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.DiscreteKalmanFilter`2">
+            <summary>
+            A Kalman filter is a recursive solution to the general dynamic estimation problem for the
+            important special case of linear system models and Gaussian noise.
+            <para>The Kalman Filter uses a predictor-corrector structure, in which
+            if a measurement of the system is available at time <italic>t</italic>,
+            We first call the Predict function, to estimate the state of the system
+            at time <italic>t</italic>. We then call the Correct function to
+            correct the estimate of state, based on the noisy measurement.</para>
+            
+            <para>
+            The discrete Kalman filter can process linear models which have Gaussian noise. 
+            If the model is not linear then estimate transition matrix (and other parameters if necessary) in each step and update Kalman filter.
+            This "dynamic" version of an Discrete Kalman filter is called Extended Kalman filter and it is used for non-linear models.
+            If the model is highly non-linear an Unscented Kalman filter or particle filtering is used.
+            See: <a href="http://en.wikipedia.org/wiki/Kalman_filter"/> for details.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.DiscreteKalmanFilter`2.#ctor(`0,System.Double[0:,0:],System.Int32,System.Int32,System.Func{`0,System.Double[]},System.Func{System.Double[],`0},System.Func{`1,System.Double[]})">
+            <summary>
+            Creates Discrete Kalman filter.
+            </summary>
+            <param name="initialState">The best estimate of the initial state. [n x 1] vector. It's dimension is - n.</param>
+            <param name="initialStateError">Initial error for a state: (assumed values – actual values)^2 + the variance of the values.
+            <para>e.g. if using ConstantAccelerationModel it can be specified as: Matrix.Diagonal(StateVectorDimension, [x, y, vX, vY, aX, aY]);</para> 
+            </param>
+            <param name="measurementVectorDimension">Dimensionality of the measurement vector - p.</param>
+            <param name="controlVectorDimension">Dimensionality of the control vector - k. If there is no external control put 0.</param>
+            <param name="stateConvertFunc">State conversion function: TState => double[]</param>
+            <param name="stateConvertBackFunc">State conversion function: double[] => TState</param>
+            <param name="measurementConvertFunc">Measurement conversion function: TMeasurement => double[]</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.DiscreteKalmanFilter`2.predictInternal(System.Double[])">
+            <summary>
+            Estimates the subsequent model state.
+            
+            x'(k) = A * x(k-1) + B * u(k).
+            P'(k) = A * P(k-1) * At + Q 
+            K(k) = P'(k) * Ht * (H * P'(k) * Ht + R)^(-1)
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.DiscreteKalmanFilter`2.CorrectInternal(System.Double[])">
+            <summary>
+            The function adjusts the stochastic model state on the basis of the given measurement of the model state.
+            
+            x(k) = x'(k) + K(k) * (z(k) - H * x'(k))
+            P(k) =(I - K(k) * H) * P'(k)
+            </summary>
+            <param name="measurement">Obtained measurement vector.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.DiscreteKalmanFilter`2.Correct(System.Double[])">
+            <summary>
+            Corrects the state error covariance based on innovation vector and Kalman update.
+            </summary>
+            <param name="innovationVector">The difference between predicted state and measurement.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.DiscreteKalmanFilter`2.Correct(System.Double[],System.Double,System.Double[0:,0:])">
+            <summary>
+            Corrects the state error covariance based on innovation vector and Kalman update.
+            </summary>
+            <param name="innovationVector">The difference between predicted state and measurement.</param>
+            <param name="covarianceMixtureFactor">Covariance mixture factor. Used in JPDAF. For Kalman filter default value is 0.</param>
+            <param name="innovationCovariance">The innovation covariance matrix. Used primary by JPDAF.</param>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel">
+            <summary>
+            Linear acceleration model for 2D case.
+            <para>Vector is composed as: [X, vX, aX, Y, vY, aY]</para>
+            Model is constructed as following:
+            p(i) = p(i-1) + (&#x0394;t) * v(i-1) + ((&#x0394;t)^2 / 2) * a(t-1);
+            v(i) = v(i-1) + (&#x0394;t) * a(t-1);
+            a(t) = a(t-1);
+            
+            <para>Look at: http://hyperphysics.phy-astr.gsu.edu/hbase/acons.html </para>
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.Dimension">
+            <summary>
+            Gets the dimension of the model.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.Velocity">
+            <summary>
+            Gets or sets the velocity.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.Acceleration">
+            <summary>
+            Gets or sets the acceleration.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.#ctor">
+            <summary>
+            Constructs an empty model.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.Evaluate(System.Double[0:,0:])">
+            <summary>
+            Evaluates the model by using the provided transition matrix.
+            </summary>
+            <param name="transitionMat">Transition matrix.</param>
+            <returns>New model state.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.GetTransitionMatrix(System.Double)">
+            <summary>
+            Gets the state transition matrix [6 x 6].
+            </summary>
+            <param name="timeInterval">Time interval.</param>
+            <returns>State transition matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.GetPositionMeasurementMatrix">
+            <summary>
+            Gets the position measurement matrix [2 x 6] used in Kalman filtering.
+            </summary>
+            <returns>Position measurement matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.GetProcessNoise(System.Double,System.Double)">
+            <summary>
+            Gets process-noise matrix [6 x 2] where the location is affected by (dt * dt * dt) / 6, velocity with the factor of (dt * dt) / 2 and the acceleration with the factor dt - integrals of dt. 
+            Factor 'dt' represents time interval.
+            </summary>
+            <param name="noise">Acceleration noise.</param>
+            <param name="timeInterval">Time interval.</param>
+            <returns>Process noise matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.FromArray(System.Double[])">
+            <summary>
+            Converts the array to the model.
+            </summary>
+            <param name="arr">Array to convert from.</param>
+            <returns>Model.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.ToArray(Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel)">
+            <summary>
+            Converts the model to the array.
+            </summary>
+            <param name="modelState">Model to convert.</param>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantAcceleration2DModel.Clone">
+            <summary>
+            Clones the model.
+            </summary>
+            <returns>The copy of the model.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel">
+            <summary>
+            Linear acceleration model for 2D case.
+            <para>Vector is composed as: [X, vX, Y, vY]</para>
+            Model is constructed as following:
+            p(i) = p(i-1) + (&#x0394;t) * v(i-1);
+            v(i) = v(i-1);
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.Dimension">
+            <summary>
+            Gets the dimension of the model.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="F:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.Velocity">
+            <summary>
+            Gets or sets the velocity.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.#ctor">
+            <summary>
+            Constructs an empty model.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.Evaluate(System.Double[0:,0:])">
+            <summary>
+            Evaluates the model by using the provided transition matrix.
+            </summary>
+            <param name="transitionMat">Transition matrix.</param>
+            <returns>New model state.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.GetTransitionMatrix(System.Double)">
+            <summary>
+            Gets the state transition matrix [4 x 4].
+            </summary>
+            <param name="timeInterval">Time interval.</param>
+            <returns>State transition matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.GetPositionMeasurementMatrix">
+            <summary>
+            Gets the position measurement matrix [2 x 4] used in Kalman filtering.
+            </summary>
+            <returns>Position measurement matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.GetProcessNoise(System.Double,System.Double)">
+            <summary>
+            Gets process-noise matrix [4 x 2] where the location is affected by (dt * dt) / 2 and velocity with the factor of dt - integrals of dt. 
+            Factor 'dt' represents time interval.
+            </summary>
+            <param name="accelerationNoise">Acceleration noise.</param>
+            <param name="timeInterval">Time interval.</param>
+            <returns>Process noise matrix.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.FromArray(System.Double[])">
+            <summary>
+            Converts the array to the model.
+            </summary>
+            <param name="arr">Array to convert from.</param>
+            <returns>Model.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.ToArray(Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel)">
+            <summary>
+            Converts the model to the array.
+            </summary>
+            <param name="modelState">Model to convert.</param>
+            <returns>Array.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ConstantVelocity2DModel.Clone">
+            <summary>
+            Clones the model.
+            </summary>
+            <returns>The copy of the model.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.IParticle">
+            <summary>
+            Particle interface defining common members for all particle instances.
+            </summary>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.IParticle.Weight">
+            <summary>
+            Particle's weight.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.IParticle.Drift">
+            <summary>
+            Applies model transition without noise to a particle's state.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.IParticle.Diffuse">
+            <summary>
+            Applies noise to a particle's state.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.IParticle`1">
+            <summary>
+            Particle interface defining common members for all particle instances.
+            </summary>
+            <typeparam name="TState">State type.</typeparam>
+        </member>
+        <member name="P:Accord.Extensions.Statistics.Filters.IParticle`1.State">
+            <summary>
+            Gets or sets the particle's state.
+            </summary>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.Filters.ParticleFilter">
+            <summary>
+            Contains static and extensions methods that operate on collection of particles.
+            </summary>
+            
+            <remarks>
+            See lectures: <a href="http://www.kev-smith.com/teaching/L7_ParticleFilters.pdf">Particle filer.</a>
+            </remarks>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.Resample``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            Draws particles randomly, clones them and reinitializes their weights.
+            </summary>
+            <typeparam name="TParticle">Particle type.</typeparam>
+            <param name="particles">Particle collection.</param>
+            <param name="sampleCount">The number of particles to draw.</param>
+            <returns>Resampled particles (particles are cloned).</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.Predict``1(System.Collections.Generic.IList{``0},System.Single)">
+            <summary>
+            Predicts particles' state by resampling, applying drift and diffuse.
+            <para>Resampling is carried out if particles' effective count ratio is less drops bellow the minimum.</para>
+            </summary>
+            <typeparam name="TParticle">Particle type.</typeparam>
+            <param name="particles">Particles.</param>
+            <param name="effectiveCountMinRatio">If calculated effective count ratio is lower than user specified value re-sampling will occur, otherwise not.
+            <para>The range is [0..1]. If resampling must occur every time put 1.</para>
+            </param>
+            <returns>Updated particles (particles are cloned).</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.Predict``1(System.Collections.Generic.IList{``0},System.Single,System.Int32)">
+            <summary>
+            Predicts particles' state by resampling, applying drift and diffuse.
+            <para>Resampling is carried out if particles' effective count ratio is less drops bellow the minimum.</para>
+            </summary>
+            <typeparam name="TParticle">Particle type.</typeparam>
+            <param name="particles">Particles.</param>
+            <param name="effectiveCountMinRatio">If calculated effective count ratio is lower than user specified value re-sampling will occur, otherwise not.
+            <para>The range is [0..1]. If resampling must occur every time put 1.</para>
+            </param>
+            <param name="sampleCount">The number of particles to draw during resampling.</param>
+            <returns>Updated particles (particles are cloned).</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.Update``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Double})">
+            <summary>
+            Updates the collection of particles by changing their weight obtained by the measurement function.
+            </summary>
+            <typeparam name="TParticle">Particle type.</typeparam>
+            <param name="particles">The collection of particles.</param>
+            <param name="measure">Measurement function which receives a particle and returns the particle's weight.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.CreateParticles``1(System.Collections.Generic.List{``0},System.Int32,System.Func{System.Double[],``0},System.Collections.Generic.IList{Accord.Statistics.Distributions.ISampleableDistribution{System.Double}})">
+            <summary>
+            Adds newly created particles to the provided list. Particles are created by generating random arguments using provided distributions and creator function.
+            </summary>
+            <typeparam name="TParticle">Particle type.</typeparam>
+            <param name="collection">The list to fill with new particles.</param>
+            <param name="numberOfParticles">Number of particles to create.</param>
+            <param name="creator">Function that creates a single particle from floating point array. The array length must be equal to the number of distributions.</param>
+            <param name="distributions">Distributions which serve as random parameter generators.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.Draw``1(System.Collections.Generic.IList{``0},System.Int32)">
+            <summary>
+            Draws particles randomly where particles which have higher weight have greater probability to be drawn. A single particle can be chosen more than once.
+            </summary>
+            <typeparam name="TParticle">Particle's type.</typeparam>
+            <param name="particles">Particles' pool.</param>
+            <param name="sampleCount">The number of samples to draw.</param>
+            <returns>Chosen particles (the particles are not cloned).</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.GetNormalizedWeights(System.Collections.Generic.IEnumerable{Accord.Extensions.Statistics.Filters.IParticle})">
+            <summary>
+            Gets normalized weights by dividing each particle weight by a sum of all weights.
+            </summary>
+            <param name="particles">Particles.</param>
+            <returns>Normalized weights.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.Filters.ParticleFilter.CalculateEntropy``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Double[]})">
+            <summary>
+            Calculates Renyi's quadratic entropy of a particle set (also used for JPDAF).
+            </summary>
+            <param name="particles">particle filter.</param>
+            <param name="stateSelector">Particle state selector function (e.g. [x, y, vX, vY]).</param>
+            <returns>Renyi's quadratic entropy of a particle set.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.MedianExtensions">
+            <summary>
+            Contains extensions for median calculation.
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.MedianExtensions.Median``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Finds median for the provided collection.
+            <para>The collection will be mutated.</para>
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="list">List.</param>
+            <returns>Median.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.MedianExtensions.MedianBy``2(System.Collections.Generic.IList{``1},System.Func{``1,``0})">
+            <summary>
+            Find median for the provided collection.
+            </summary>
+            <typeparam name="TDst">The key type.</typeparam>
+            <typeparam name="TSrc">The element type.</typeparam>
+            <param name="collection">Collection.</param>
+            <param name="selector">Key selector.</param>
+            <returns>Median for the provided collection for the specified key.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.NthOrderStatisticExtensions">
+            <summary>
+            Extensions for NOrderStatistics calculation.
+            <para>
+            Taken from: <a href="http://stackoverflow.com/questions/4140719/i-need-c-sharp-function-that-will-calculate-median">Median calculation</a> and modified.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.NthOrderStatisticExtensions.partition``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32,System.Random)">
+            <summary>
+            Partitions the given list around a pivot element such that all elements on left of pivot are less or equal pivot
+            and the ones at the right are greater or equal pivot. This method can be used for sorting, N-order statistics such as
+            as median finding algorithms.
+            Pivot is selected randomly if random number generator is supplied else its selected as last element in the list.
+            Reference: Introduction to Algorithms 3rd Edition, Corman et al, pp 171
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.NthOrderStatisticExtensions.GetNthSmallest``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32,System.Int32,System.Random)">
+            <summary>
+            Returns Nth smallest element from the list. 
+            <para>
+            Note: specified list would be mutated in the process.
+            Reference: Introduction to Algorithms 3rd Edition, Corman et al, pp 216
+            </para>
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="list">List.</param>
+            <param name="n">Index for the smallest element to return. 
+            Here n starts from 0 so that n=0 returns minimum, n=1 returns 2nd smallest element etc.
+            </param>
+            <param name="start">The starting element for the provided list.</param>
+            <param name="end">The end element for th provided list.</param>
+            <param name="rnd">
+            Random generator for pivot element selection.
+            If supplied pivot element is selected randomly, otherwise it is selected as last element in the list.
+            </param>
+            <returns>Nth smallest element.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.NthOrderStatisticExtensions.GetNthSmallest``1(System.Collections.Generic.IList{``0},System.Int32,System.Random)">
+            <summary>
+            Returns Nth smallest element from the list. 
+            <para>
+            Note: specified list would be mutated in the process.
+            Reference: Introduction to Algorithms 3rd Edition, Corman et al, pp 216
+            </para>
+            </summary>
+            <typeparam name="T">Element type.</typeparam>
+            <param name="list">List.</param>
+            <param name="n">Index for the smallest element to return. 
+            Here n starts from 0 so that n=0 returns minimum, n=1 returns 2nd smallest element etc.
+            </param>
+            <param name="rnd">
+            Random generator for pivot element selection.
+            If supplied pivot element is selected randomly, otherwise it is selected as last element in the list.
+            </param>
+            <returns>Nth smallest element.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.RunningAverage">
+            <summary>
+            Contains methods for running average calculation. Scalar and vectors of type <see cref="T:System.Double"/> are supported.
+            <para>Most methods can be used as extensions.</para>
+            <para> See: <a href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance"/> for details.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.RunningAverageIncDec(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double,System.Double})">
+            <summary>
+            Calculates incremental and decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental average, decremental average).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.RunningAverageIncremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double})">
+            <summary>
+            Calculates incremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.RunningAverageDecremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double})">
+            <summary>
+            Calculates decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.UpdateAverageIncremental(System.Double,System.Int32,System.Double)">
+            <summary>
+            Updates running average incrementally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is 0.</param>
+            <param name="nSamples">Number of samples that are included (with current element). Starting number is 1.</param>
+            <param name="sample">Sample to add.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.UpdateAverageDecremental(System.Double,System.Int32,System.Double)">
+            <summary>
+            Updates running average decrement-ally.
+            </summary>
+            <param name="postAverage">Post average value. The initial value is the average of the whole collection.</param>
+            <param name="nSamples">Number of samples that are included (without current element). Starting number is the total number of samples.</param>
+            <param name="sample">Sample to remove.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.RunningAverageIncDec(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double[]})">
+            <summary>
+            Calculates incremental and decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental average, decremental average).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.RunningAverageIncremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[]})">
+            <summary>
+            Calculates incremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.RunningAverageDecremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[]})">
+            <summary>
+            Calculates decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.UpdateAverageIncremental(System.Double[],System.Int32,System.Double[])">
+            <summary>
+            Updates running average incrementally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is 0.</param>
+            <param name="nSamples">Number of samples that are included (with current element). Starting number is 1.</param>
+            <param name="sample">Sample to add.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.UpdateAverageDecremental(System.Double[],System.Int32,System.Double[])">
+            <summary>
+            Updates running average decrement-ally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is the average of the whole collection.</param>
+            <param name="nSamples">Number of samples that are included (without current element). Starting number is the total number of samples.</param>
+            <param name="sample">Sample to remove.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningAverage.Average(System.Collections.Generic.ICollection{System.Double[]})">
+            <summary>
+            Calculates average of the specified collection. Average is calculated for each sample dimension.
+            </summary>
+            <param name="data">Collection.</param>
+            <returns>Average for each sample dimension.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.RunningVariance">
+            <summary>
+            Contains methods for running variance calculation. Scalar and vectors of type <see cref="T:System.Double"/> are supported.
+            <para>Most methods can be used as extensions.</para>
+            <para> See: <a href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance"/> for details.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.RunningVarianceIncDec(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double,System.Double,System.Double,System.Double})">
+            <summary>
+            Calculates incremental and decremental running variance.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental average, incremental variance, decremental average, decremental variance).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.RunningVarianceIncremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double,System.Double})">
+            <summary>
+            Calculates incremental running average and variance.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average, incremental variance).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.RunningVarianceDecremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double,System.Double})">
+            <summary>
+            Calculates decremental running average and variance.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average, decremental variance).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.UpdateVarianceIncremental(System.Double,System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            Updates running variance incrementally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is 0.</param>
+            <param name="average">Updated average value.</param>
+            <param name="prevVariance">Previous variance value. The initial value is 0.</param>
+            <param name="nSamples">Number of samples that are included (with current element). Starting number is 1.</param>
+            <param name="sample">Sample to add.</param>
+            <returns>New variance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.UpdateVarianceDecremental(System.Double,System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            Updates running variance decrement-ally.
+            </summary>
+            <param name="postAverage">Post average value. The initial value is the average of the whole collection.</param>
+            <param name="average">Updated average value.</param>
+            <param name="postVariance">Previous variance value. The initial value is the variance of the whole collection.</param>
+            <param name="nSamples">Number of samples that are included (without current element). Starting number is the total number of samples.</param>
+            <param name="sample">Sample to remove.</param>
+            <returns>New variance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.Variance(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Calculates variance of the provided collection. Division is done using total number of samples.
+            </summary>
+            <param name="data">Collection.</param>
+            <returns>Variance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.RunningVarianceIncDec(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double,System.Double[],System.Double})">
+            <summary>
+            Calculates incremental and decremental running variance.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental (average, incremental variance, decremental average, decremental variance).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.RunningVarianceIncremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double})">
+            <summary>
+            Calculates incremental running average and variance.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average, incremental variance).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.RunningVarianceDecremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double})">
+            <summary>
+            Calculates decremental running average and variance.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average, decremental variance).</para>
+            </param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.UpdateVarianceIncremental(System.Double[],System.Double[],System.Double,System.Int32,System.Double[])">
+            <summary>
+            Updates running variance incrementally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is 0.</param>
+            <param name="average">Updated average value.</param>
+            <param name="prevVariance">Previous variance value. The initial value is 0.</param>
+            <param name="nSamples">Number of samples that are included (with current element). Starting number is 1.</param>
+            <param name="sample">Sample to add.</param>
+            <returns>New variance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.UpdateVarianceDecremental(System.Double[],System.Double[],System.Double,System.Int32,System.Double[])">
+            <summary>
+            Updates running variance decrement-ally.
+            </summary>
+            <param name="postAverage">Post average value. The initial value is the average of the whole collection.</param>
+            <param name="average">Updated average value.</param>
+            <param name="postVariance">Previous variance value. The initial value is the variance of the whole collection.</param>
+            <param name="nSamples">Number of samples that are included (without current element). Starting number is the total number of samples.</param>
+            <param name="sample">Sample to remove.</param>
+            <returns>New variance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningVariance.Variance(System.Collections.Generic.IEnumerable{System.Double[]})">
+            <summary>
+            Calculates variance of the specified collection. Variance is calculated for each sample dimension. 
+            Division is done using total number of samples.
+            </summary>
+            <param name="data">Collection.</param>
+            <returns>Variance for each sample dimension.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.RunningWeightedAverage">
+            <summary>
+            Contains methods for running weighted average calculation. Scalar and vectors of type <see cref="T:System.Double"/> are supported.
+            <para>Most methods can be used as extensions.</para>
+            <para> See: <a href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance"/> for details.</para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.RunningAverageIncDec(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double,System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates incremental and decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental average, decremental average).</para>
+            </param>
+            <param name="weights">Sample weights</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.RunningAverageIncremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates incremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average).</para>
+            </param>
+            <param name="weights">Sample weights</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.RunningAverageDecremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average).</para>
+            </param>
+            <param name="weights">Sample weights</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.UpdateAverageIncremental(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Updates running average incrementally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is 0.</param>
+            <param name="prevWeightSum">Weight sum. The initial value is 0.</param>
+            <param name="sample">Sample to add.</param>
+            <param name="weight">Sample weight.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.UpdateAverageDecremental(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Updates running average decrement-ally.
+            </summary>
+            <param name="postAverage">Post average value. The initial value is the average of the whole collection.</param>
+            <param name="postWeightSum">Weight sum. The initial value is the sum of weights.</param>
+            <param name="sample">Sample to remove.</param>
+            <param name="weight">Sample weight.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.Average(System.Collections.Generic.IEnumerable{System.Double},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Calculated weighted-average of the provided collection.
+            </summary>
+            <param name="samples">Samples.</param>
+            <param name="weights">Sample weights.</param>
+            <returns>Weighted average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.RunningAverageIncDec(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double[]},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates incremental and decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental average, decremental average).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.RunningAverageIncremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[]},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates incremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.RunningAverageDecremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[]},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates decremental running average.
+            </summary>
+            <param name="data">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.UpdateAverageIncremental(System.Double[],System.Int32,System.Double[],System.Double)">
+            <summary>
+            Updates running average incrementally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is 0.</param>
+            <param name="nSamples">Number of samples that are included (with current element). Starting number is 1.</param>
+            <param name="sample">Sample to add.</param>
+            <param name="weight">Sample weight.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.UpdateAverageDecremental(System.Double[],System.Int32,System.Double[],System.Double)">
+            <summary>
+            Updates running average decrement-ally.
+            </summary>
+            <param name="prevAverage">Previous average value. The initial value is the average of the whole collection.</param>
+            <param name="nSamples">Number of samples that are included (without current element). Starting number is the total number of samples.</param>
+            <param name="sample">Sample to remove.</param>
+            <param name="weight">Sample weight.</param>
+            <returns>New average.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedAverage.Average(System.Collections.Generic.IEnumerable{System.Double[]},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Calculates average of the specified collection. Average is calculated for each sample dimension.
+            </summary>
+            <param name="data">Collection.</param>
+            <param name="weights">Sample weights.</param>
+            <returns>Average for each sample dimension.</returns>
+        </member>
+        <member name="T:Accord.Extensions.Statistics.RunningWeightedVariance">
+            <summary>
+            Contains methods for running variance calculation. Scalar and vectors of type <see cref="T:System.Double"/> are supported.
+            <para>Most methods can be used as extensions.</para>
+            <para> 
+            See: <a href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance"/>
+            and <a href="http://nfs-uxsup.csx.cam.ac.uk/~fanf2/hermes/doc/antiforgery/stats.pdf"/> for details.
+            </para>
+            </summary>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.RunningVarianceIncDec(System.Collections.Generic.IReadOnlyList{System.Double},System.Action{System.Int32,System.Double,System.Double,System.Double,System.Double},System.Collections.Generic.IList{System.Double},System.Boolean)">
+            <summary>
+            Calculates incremental and decremental running variance.
+            </summary>
+            <param name="samples">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental average, incremental variance, decremental average, decremental variance).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+            <param name="returnSSE">True to return unnormalized variance (SSE). False to return variance instead.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.RunningVarianceIncremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double,System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates incremental running average and variance.
+            </summary>
+            <param name="samples">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average, incremental variance).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.RunningVarianceDecremental(System.Collections.Generic.IList{System.Double},System.Action{System.Int32,System.Double,System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates decremental running average and variance.
+            </summary>
+            <param name="samples">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average, decremental variance).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.UpdateVarianceIncremental(System.Double@,System.Double@,System.Double@,System.Double,System.Double)">
+            <summary>
+            Adds sample to the total variance.
+            </summary>
+            <param name="SSE">The samples SSE (unnormalized variance). The initial value is 0.</param>
+            <param name="sumWeight">Sum of samples weights. The initial value is 0.</param>
+            <param name="mean">Samples mean. The initial value is zero.</param>
+            <param name="sample">Sample to add.</param>
+            <param name="weight">Sample weight.</param>
+            <returns>The variance of the sub-collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.UpdateVarianceDecremental(System.Double@,System.Double@,System.Double@,System.Double,System.Double)">
+            <summary>
+            Removes the sample impact from the total variance.
+            </summary>
+            <param name="SSE">The samples SSE (unnormalized variance). The initial value is the variance multiplied by sum of weights.</param>
+            <param name="sumWeight">Sum of samples weights. The initial value is the sum of weights.</param>
+            <param name="mean">Samples mean. The initial value is the total mean.</param>
+            <param name="sample">Sample to remove.</param>
+            <param name="weight">Sample weight.</param>
+            <returns>The variance of the sub-collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.Variance(System.Collections.Generic.IEnumerable{System.Double},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Calculates weighted variance of the provided collection. Division is done using total number of samples.
+            <para>See <a href="http://nfs-uxsup.csx.cam.ac.uk/~fanf2/hermes/doc/antiforgery/stats.pdf">weighted variance</a> for details.</para>
+            </summary>
+            <param name="samples">Collection.</param>
+            <param name="weights">Sample weights.</param>
+            <returns>Variance.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.RunningVarianceIncDec(System.Collections.Generic.IReadOnlyList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double,System.Double[],System.Double},System.Collections.Generic.IReadOnlyList{System.Double},System.Boolean)">
+            <summary>
+            Calculates incremental and decremental running variance.
+            </summary>
+            <param name="samples">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition-removal. 
+            <para>Parameters are: (index, incremental (average, incremental variance, decremental average, decremental variance).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+            <param name="returnSSE">True to return unnormalized variance (SSE). False to return variance instead.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.RunningVarianceIncremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates incremental running average and variance.
+            </summary>
+            <param name="samples">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element addition. 
+            <para>Parameters are: (index, incremental average, incremental variance).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.RunningVarianceDecremental(System.Collections.Generic.IList{System.Double[]},System.Action{System.Int32,System.Double[],System.Double},System.Collections.Generic.IList{System.Double})">
+            <summary>
+            Calculates decremental running average and variance.
+            </summary>
+            <param name="samples">Sample data.</param>
+            <param name="onCalculated">
+            Action callback which fires on each element removal. 
+            <para>Parameters are: (index, decremental average, decremental variance).</para>
+            </param>
+            <param name="weights">Sample weights.</param>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.UpdateVarianceSumIncremental(System.Double@,System.Double@,System.Double[]@,System.Double[],System.Double)">
+            <summary>
+            Adds sample to the total variance.
+            </summary>
+            <param name="SSE">The samples SSE (unnormalized variance). The initial value is 0.</param>
+            <param name="sumWeight">Sum of samples weights. The initial value is 0.</param>
+            <param name="mean">Samples mean. The initial value is zero vector.</param>
+            <param name="sample">Sample to add.</param>
+            <param name="weight">Sample weight.</param>
+            <returns>The variance of the sub-collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.UpdateVarianceSumDecremental(System.Double@,System.Double@,System.Double[]@,System.Double[],System.Double)">
+            <summary>
+            Removes the sample impact from the total variance.
+            </summary>
+            <param name="SSE">The samples SSE (unnormalized variance). The initial value is the variance multiplied by su of weights.</param>
+            <param name="sumWeight">Sum of samples weights. The initial value is the sum of weights..</param>
+            <param name="mean">Samples mean. The initial value is the total mean.</param>
+            <param name="sample">Sample to remove..</param>
+            <param name="weight">Sample weight.</param>
+            <returns>The variance of the sub-collection.</returns>
+        </member>
+        <member name="M:Accord.Extensions.Statistics.RunningWeightedVariance.Variance(System.Collections.Generic.IEnumerable{System.Double[]},System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>
+            Calculates variance of the specified collection. Variance is calculated for each sample dimension. 
+            Division is done using total number of samples.
+            </summary>
+            <param name="samples">Samples.</param>
+            <param name="weights">Sample weights.</param>
+            <returns>Variance for each sample dimension.</returns>
+        </member>
+    </members>
+</doc>
