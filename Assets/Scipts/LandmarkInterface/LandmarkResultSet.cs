@@ -59,7 +59,7 @@ namespace LandmarkInterface
         private void Update()
         {
             LeftHandFilter.UpdateFilterParameter(FilterTimeInterval, FilterNoise, DisplacementLimit);
-            LeftHandFilter.UpdateFilterParameter(FilterTimeInterval, FilterNoise, DisplacementLimit);
+            RightHandFilter.UpdateFilterParameter(FilterTimeInterval, FilterNoise, DisplacementLimit);
         }
 
         public void UpdateLandmark(LandmarkType landmarkType, NormalizedLandmarkList landmarkList)
